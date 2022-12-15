@@ -1,0 +1,19 @@
+# Changes here will be overwritten by Copier
+_commit: 38a98f2
+_src_path: gh:browniebroke/pypackage-template
+add_me_as_contributor: true
+copyright_year: '2022'
+documentation: true
+email: me@dje.li
+full_name: Avi Miller
+github_username: Djelibeybi
+initial_commit: true
+open_source_license: MIT
+package_name: asyncio_soma_connect
+project_name: Asynchronous SOMA Connect library
+project_short_description: Async library that connects to SOMA Connect
+project_slug: asyncio-soma-connect
+run_poetry_install: true
+setup_github: true
+setup_pre_commit: true
+
