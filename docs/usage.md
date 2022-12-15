@@ -56,7 +56,7 @@ Returns the firmware version and current position of the shade:
   "result": "success",
   "version": "2.3.1",
   "mac": "aa:bb:cc:dd:ee:ff",
-  "position": 100
+  "position": 0
 }
 ```
 
@@ -90,10 +90,11 @@ Returns:
 { "result": "success", "version": "2.3.1", "mac": "aa:bb:cc:dd:ee:ff" }
 ```
 
-### set_shade_position(MAC, position: int)
+### set_shade_position(MAC, position: int, close_upwards: bool = False, morning_mode: bool = False)
 
-This method will set the shade to the position specified, where 0 is fully open
-and 100 is fully closed.
+This method will set the shade to `position`, where 0 is fully open
+and 100 is fully closed. To close Tilt shades upwards, set `close_upwards` to `True`.
+To enable the slower and quieter morning mode, set `morning_mode` to `True`.
 
 Returns:
 
@@ -104,3 +105,28 @@ Returns:
 ### get_battery_level(mac)
 
 Returns the current battery level of the shade:
+
+```json
+{
+  "result": "success",
+  "version": "2.3.1",
+  "mac": "aa:bb:cc:dd:ee:ff",
+  "battery_level": 420,
+  "battery_percentage": 100
+}
+```
+
+### get_light_level(mac)
+
+Returns the current solar panel light level from the device, if the solar panel
+charger is connected. This requires a connect to the SOMA shade and should not
+be polled often or across multiple devices at the same time.
+
+```json
+{
+  "result": "success",
+  "version": "2.3.1",
+  "mac": "aa:bb:cc:dd:ee:ff",
+  "light_level": 5153
+}
+```
