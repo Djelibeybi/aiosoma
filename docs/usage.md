@@ -1,16 +1,16 @@
 # Usage
 
-To use this package, import `Aiosoma`:
+To use this package, import `AioSoma`:
 
 ```python
-from aiosoma import Aiosoma
+from aiosoma import AioSoma
 ```
 
-Next, create an `Aiosoma` object using either the hostname or IP address and port
+Next, create an `AioSoma` object using either the hostname or IP address and port
 of your SOMA Connect. Using a static IP address is recommended.
 
 ```python
-soma = Aiosoma("soma-connect.local", 3000)
+soma = AioSoma("soma-connect.local", 3000)
 ```
 
 ## Methods
