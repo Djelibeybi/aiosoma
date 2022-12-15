@@ -1,14 +1,14 @@
 # Asynchronous SOMA Connect library
 
 <p align="center">
-  <a href="https://github.com/Djelibeybi/asyncio-soma-connect/actions?query=workflow%3ACI">
-    <img src="https://img.shields.io/github/workflow/status/Djelibeybi/asyncio-soma-connect/CI/main?label=CI&logo=github&style=flat-square" alt="CI Status" >
+  <a href="https://github.com/Djelibeybi/aiosoma/actions?query=workflow%3ACI">
+    <img src="https://img.shields.io/github/workflow/status/Djelibeybi/aiosoma/CI/main?label=CI&logo=github&style=flat-square" alt="CI Status" >
   </a>
-  <a href="https://asyncio-soma-connect.readthedocs.io">
-    <img src="https://img.shields.io/readthedocs/asyncio-soma-connect.svg?logo=read-the-docs&logoColor=fff&style=flat-square" alt="Documentation Status">
+  <a href="https://aiosoma.readthedocs.io">
+    <img src="https://img.shields.io/readthedocs/aiosoma.svg?logo=read-the-docs&logoColor=fff&style=flat-square" alt="Documentation Status">
   </a>
-  <a href="https://codecov.io/gh/Djelibeybi/asyncio-soma-connect">
-    <img src="https://img.shields.io/codecov/c/github/Djelibeybi/asyncio-soma-connect.svg?logo=codecov&logoColor=fff&style=flat-square" alt="Test coverage percentage">
+  <a href="https://codecov.io/gh/Djelibeybi/aiosoma">
+    <img src="https://img.shields.io/codecov/c/github/Djelibeybi/aiosoma.svg?logo=codecov&logoColor=fff&style=flat-square" alt="Test coverage percentage">
   </a>
 </p>
 <p align="center">
@@ -23,20 +23,22 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://pypi.org/project/asyncio-soma-connect/">
-    <img src="https://img.shields.io/pypi/v/asyncio-soma-connect.svg?logo=python&logoColor=fff&style=flat-square" alt="PyPI Version">
+  <a href="https://pypi.org/project/aiosoma/">
+    <img src="https://img.shields.io/pypi/v/aiosoma.svg?logo=python&logoColor=fff&style=flat-square" alt="PyPI Version">
   </a>
-  <img src="https://img.shields.io/pypi/pyversions/asyncio-soma-connect.svg?style=flat-square&logo=python&amp;logoColor=fff" alt="Supported Python versions">
-  <img src="https://img.shields.io/pypi/l/asyncio-soma-connect.svg?style=flat-square" alt="License">
+  <img src="https://img.shields.io/pypi/pyversions/aiosoma.svg?style=flat-square&logo=python&amp;logoColor=fff" alt="Supported Python versions">
+  <img src="https://img.shields.io/pypi/l/aiosoma.svg?style=flat-square" alt="License">
 </p>
 
-Async library that connects to SOMA Connect
+Asyncio library that controls SOMA Shades via a SOMA Connect device.
 
 ## Installation
 
 Install this via pip (or your favourite package manager):
 
-`pip install asyncio-soma-connect`
+`pip install aiosoma`
+
+## Usage
 
 ## Contributors ✨
 

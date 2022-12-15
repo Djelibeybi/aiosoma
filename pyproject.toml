@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "asyncio-soma-connect"
+name = "aiosoma"
 version = "0.0.0"
-description = "Async library that connects to SOMA Connect"
+description = "Asyncio SOMA Connect"
 authors = ["Avi Miller <me@dje.li>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/Djelibeybi/asyncio-soma-connect"
-documentation = "https://asyncio-soma-connect.readthedocs.io"
+repository = "https://github.com/Djelibeybi/aiosoma"
+documentation = "https://aiosoma.readthedocs.io"
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Developers",
@@ -15,19 +15,26 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
 ]
 packages = [
-    { include = "asyncio_soma_connect", from = "src" },
+    { include = "aiosoma", from = "src" },
 ]
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/Djelibeybi/asyncio-soma-connect/issues"
-"Changelog" = "https://github.com/Djelibeybi/asyncio-soma-connect/blob/main/CHANGELOG.md"
+"Bug Tracker" = "https://github.com/Djelibeybi/aiosoma/issues"
+"Changelog" = "https://github.com/Djelibeybi/aiosoma/blob/main/CHANGELOG.md"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.9"
+aiohttp = "^3.8.3"
+backoff = "^2.2.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0"
 pytest-cov = "^3.0"
+pre-commit = "^2.20.0"
+black = "^22.12.0"
+isort = "^5.11.2"
+pytest-aiohttp = "^1.0.4"
+aioresponses = "^0.7.4"
 
 [tool.poetry.group.docs]
 optional = true
@@ -40,11 +47,11 @@ sphinx-rtd-theme = ">=1.0"
 [tool.semantic_release]
 branch = "main"
 version_toml = "pyproject.toml:tool.poetry.version"
-version_variable = "src/asyncio_soma_connect/__init__.py:__version__"
+version_variable = "src/aiosoma/__init__.py:__version__"
 build_command = "pip install poetry && poetry build"
 
 [tool.pytest.ini_options]
-addopts = "-v -Wdefault --cov=asyncio_soma_connect --cov-report=term-missing:skip-covered"
+addopts = "-v -Wdefault --cov=aiosoma --cov-report=term-missing:skip-covered"
 pythonpath = ["src"]
 
 [tool.coverage.run]
@@ -61,7 +68,7 @@ exclude_lines = [
 
 [tool.isort]
 profile = "black"
-known_first_party = ["asyncio_soma_connect", "tests"]
+known_first_party = ["aiosoma", "tests"]
 
 [tool.mypy]
 check_untyped_defs = true
