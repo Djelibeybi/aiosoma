@@ -10,8 +10,6 @@ Next, create an `Aiosoma` object using either the hostname or IP address and por
 of your SOMA Connect. Using a static IP address is recommended.
 
 ```python
-from aiosoma import Aiosoma
-
 soma = Aiosoma("soma-connect.local", 3000)
 ```
 

@@ -6,10 +6,10 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "Asyncio SOMA Connect"
+project = "AioSoma: Asyncio control for SOMA Connect"
 copyright = "2022, Avi Miller"
 author = "Avi Miller"
-release = "0.0.0"
+release = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
