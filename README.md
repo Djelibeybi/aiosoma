@@ -1,8 +1,9 @@
 # Asynchronous SOMA Connect library
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <a href="https://github.com/Djelibeybi/aiosoma/actions?query=workflow%3ACI">
-    <img src="https://img.shields.io/github/workflow/status/Djelibeybi/aiosoma/CI/main?label=CI&logo=github&style=flat-square" alt="CI Status" >
+    <img src="https://img.shields.io/github/actions/workflow/status/Djelibeybi/aiosoma/ci.yml?branch=main&logo=github&style=flat-square" alt="CI status" />
   </a>
   <a href="https://aiosoma.readthedocs.io">
     <img src="https://img.shields.io/readthedocs/aiosoma.svg?logo=read-the-docs&logoColor=fff&style=flat-square" alt="Documentation Status">
