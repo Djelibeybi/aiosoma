@@ -46,8 +46,19 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
-<!-- markdownlint-enable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://omg.dje.li"><img src="https://avatars.githubusercontent.com/u/103232?v=4?s=80" width="80px;" alt="Avi Miller"/><br /><sub><b>Avi Miller</b></sub></a><br /><a href="https://github.com/Djelibeybi/aiosoma/commits?author=Djelibeybi" title="Code">💻</a> <a href="https://github.com/Djelibeybi/aiosoma/commits?author=Djelibeybi" title="Documentation">📖</a> <a href="#maintenance-Djelibeybi" title="Maintenance">🚧</a> <a href="https://github.com/Djelibeybi/aiosoma/commits?author=Djelibeybi" title="Tests">⚠️</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-end -->
 
