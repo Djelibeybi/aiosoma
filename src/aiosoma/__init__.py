@@ -4,7 +4,7 @@ from __future__ import annotations
 import aiohttp
 import backoff
 
-__version__ = "0.0.0"
+__version__ = "0.1.0"
 
 
 class AioSoma:
