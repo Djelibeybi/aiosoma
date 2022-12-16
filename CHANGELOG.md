@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.1 (2022-12-16)
+### Fix
+* Remove debug print line ([`7c759f0`](https://github.com/Djelibeybi/aiosoma/commit/7c759f0589444fa641dafa81c7eb7561ecbde249))
+
 ## v0.2.0 (2022-12-16)
 ### Feature
 * Add 'soma' command-line utility to control shades ([`52f73e2`](https://github.com/Djelibeybi/aiosoma/commit/52f73e2710d1c54523d5416fc1653382db709d72))
