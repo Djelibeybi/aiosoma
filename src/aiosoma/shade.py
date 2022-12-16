@@ -82,21 +82,21 @@ class Shade:
         """Return the current battery level."""
         return self._battery_percentage
 
-    async def open(self) -> dict[str, Any] | bool:
+    async def open(self) -> dict[str, Any] | None:
         """Open this shade."""
         return await self._soma.open_shade(self._mac)
 
-    async def close(self) -> dict[str, Any] | bool:
+    async def close(self) -> dict[str, Any] | None:
         """Close shade."""
         return await self._soma.close_shade(self._mac)
 
-    async def stop(self) -> dict[str, Any] | bool:
+    async def stop(self) -> dict[str, Any] | None:
         """Stop shade."""
         return await (self._soma.stop_shade(self._mac))
 
     async def set_position(
         self, position: int, close_upwards: bool = False, morning_mode: bool = False
-    ) -> dict[str, Any] | bool:
+    ) -> dict[str, Any] | None:
         """Set shade to specific position."""
         return await self._soma.set_shade_position(
             self._mac,
@@ -105,15 +105,15 @@ class Shade:
             morning_mode=morning_mode,
         )
 
-    async def get_state(self) -> dict[str, Any] | bool:
+    async def get_state(self) -> dict[str, Any] | None:
         """Get shade state."""
         response = await self._soma.get_shade_state(self._mac)
         return response
 
-    async def get_battery_level(self) -> dict[str, int] | bool:
+    async def get_battery_level(self) -> dict[str, int] | None:
         """Get battery level."""
         return await self._soma.get_battery_level(self._mac)
 
-    async def get_light_level(self) -> dict[str, Any] | bool:
+    async def get_light_level(self) -> dict[str, Any] | None:
         """Get light level."""
         return await self._soma.get_light_level(self._mac)

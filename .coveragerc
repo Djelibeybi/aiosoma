@@ -1,0 +1,2 @@
+[run]
+omit = src/aiosoma/__cli__.py
