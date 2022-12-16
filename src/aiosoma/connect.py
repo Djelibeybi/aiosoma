@@ -19,7 +19,9 @@ class Connect:
         self._port = port
         self._url = f"http://{host}:{port}"
 
-    @backoff.on_exception(backoff.expo, aiohttp.ClientError, max_tries=3)
+    @backoff.on_exception(
+        backoff.expo, aiohttp.ClientError, max_tries=3, logger=_LOGGER
+    )
     async def _get(
         self, endpoint: str, **kwargs: dict[str, Any]
     ) -> dict[str, Any] | None:
@@ -31,7 +33,6 @@ class Connect:
 
         async with aiohttp.ClientSession(raise_for_status=False) as session:
             async with session.get(url, params=params) as response:
-                print(response.url)
                 json: dict[str, Any] = await response.json()
                 result = json.get("result", None)
 
