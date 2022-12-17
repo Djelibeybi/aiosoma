@@ -1,4 +1,4 @@
-"""AioSoma"""
+"""aiosoma"""
 
 from .connect import Connect
 from .shade import Shade
