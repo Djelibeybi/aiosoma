@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.2 (2022-12-17)
+### Fix
+* Downgrade aiohttp to suitable version for Home Assistant ([`b02a602`](https://github.com/Djelibeybi/aiosoma/commit/b02a602e6f9d29bbe7680bd304f838e0164e4b3c))
+
+### Documentation
+* Update the project name and usage docs for readthedocs ([`231a3f4`](https://github.com/Djelibeybi/aiosoma/commit/231a3f404b660cad20c0e1be5da7858c68b036ef))
+* Fix formatting of aiosoma (again) ([`6a0fcb4`](https://github.com/Djelibeybi/aiosoma/commit/6a0fcb4785dd01699f852d68513a135d74915483))
+* Update the contribution guide ([`7987ffc`](https://github.com/Djelibeybi/aiosoma/commit/7987ffc4fb80b6d0a35df66ddb1932e8588ca913))
+
 ## v0.2.1 (2022-12-16)
 ### Fix
 * Remove debug print line ([`7c759f0`](https://github.com/Djelibeybi/aiosoma/commit/7c759f0589444fa641dafa81c7eb7561ecbde249))
