@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "AioSoma: Asyncio control for SOMA Connect"
+project = "aiosoma"
 copyright = "2022, Avi Miller"
 author = "Avi Miller"
 release = "0.1.0"

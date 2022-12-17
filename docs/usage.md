@@ -1,21 +1,21 @@
 # Usage
 
-To use this package, import `AioSoma`:
+To use this package, import `Connect` (and optionally `Shade`) from `aiosoma:
 
 ```python
-from aiosoma import AioSoma
+from aiosoma import Connect, Shade
 ```
 
-Next, create an `AioSoma` object using either the hostname or IP address and port
-of your SOMA Connect. Using a static IP address is recommended.
+Next, create an `Connect` object using either the hostname (or IP address) and port
+of your SOMA Connect. Assigning a static IP address to your SOMA Connect is recommended.
 
 ```python
-soma = AioSoma("soma-connect.local", 3000)
+soma = Connect("soma-connect.local", 3000)
 ```
 
 ## Methods
 
-### list_devices()
+### `list_devices()`
 
 Use to list all the devices visible to SOMA Connect. The `mac` address of the
 shade you want to control is a required parameter for all the other methods.
@@ -47,7 +47,7 @@ shade you want to control is a required parameter for all the other methods.
 }
 ```
 
-### get_shade_state(mac)
+### `get_shade_state(mac)`
 
 Returns the firmware version and current position of the shade:
 
@@ -60,7 +60,7 @@ Returns the firmware version and current position of the shade:
 }
 ```
 
-### open_shade(mac)
+### `open_shade(mac)`
 
 This method will open the shade unless stopped by manually calling `stop_shade()`.
 
@@ -70,7 +70,7 @@ Returns:
 { "result": "success", "version": "2.3.1", "mac": "aa:bb:cc:dd:ee:ff" }
 ```
 
-### close_shade(mac)
+### `close_shade(mac)`
 
 This method will close the shade unless stopped by manually calling `stop_shade()`.
 
@@ -80,7 +80,7 @@ Returns:
 { "result": "success", "version": "2.3.1", "mac": "aa:bb:cc:dd:ee:ff" }
 ```
 
-### stop_shade(mac)
+### `stop_shade(mac)`
 
 This method will stop any movement currently in progress.
 
@@ -90,7 +90,7 @@ Returns:
 { "result": "success", "version": "2.3.1", "mac": "aa:bb:cc:dd:ee:ff" }
 ```
 
-### set_shade_position(MAC, position: int, close_upwards: bool = False, morning_mode: bool = False)
+### `set_shade_position(MAC, position: int, close_upwards: bool = False, morning_mode: bool = False)`
 
 This method will set the shade to `position`, where 0 is fully open
 and 100 is fully closed. To close Tilt shades upwards, set `close_upwards` to `True`.
@@ -102,7 +102,7 @@ Returns:
 { "result": "success", "version": "2.3.1", "mac": "aa:bb:cc:dd:ee:ff" }
 ```
 
-### get_battery_level(mac)
+### `get_battery_level(mac)`
 
 Returns the current battery level of the shade:
 
@@ -116,7 +116,7 @@ Returns the current battery level of the shade:
 }
 ```
 
-### get_light_level(mac)
+### `get_light_level(mac)`
 
 Returns the current solar panel light level from the device, if the solar panel
 charger is connected. This requires a connect to the SOMA shade and should not
