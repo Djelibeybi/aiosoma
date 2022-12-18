@@ -225,6 +225,8 @@ async def test_shade_failures():
     assert shade.battery_level is None
     assert shade.battery_percentage is None
 
+    assert await shade.set_position(10) is False
+
     await shade.get_current_position()
     assert shade.position is None
 

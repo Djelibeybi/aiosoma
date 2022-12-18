@@ -16,27 +16,19 @@ from . import (
     URL,
     gen_bad_state,
     gen_shade_state,
-    mocked_bad_connect,
     mocked_connect,
 )
 
 
 @pytest.mark.asyncio()
-async def test_failed_get():
-    """Test soma.set_shade_position()."""
+async def test_failed_list_devices():
+    """Test failed response to list_devices request."""
     with aioresponses() as mocked_response:
         soma = mocked_connect()
-        mocked_response.get(f"{URL}/open_shade/{MAC}", payload=gen_bad_state())
-        open_shade = await soma.open_shade(MAC)
-        assert open_shade is False
-
-
-@pytest.mark.asyncio()
-async def test_failed_soma_connect():
-    """Test failure cases for SOMA Connect."""
-    soma = mocked_bad_connect()
-    await soma.list_devices()
-    assert soma.shades is None
+        mocked_response.get(f"{URL}/list_devices", payload=gen_bad_state())
+        shade_list = await soma.list_devices()
+        assert shade_list is None
+        assert soma.shades is None
 
 
 @pytest.mark.asyncio()
@@ -216,36 +208,26 @@ async def test_without_mac():
         soma = SomaConnect(HOST, PORT)
 
         pattern = re.compile(r"^http://soma-connect\.local\:3000/.*$")
-        mocked_response.get(pattern, payload=gen_bad_state())
+        mocked_response.get(pattern, payload=gen_bad_state(), repeat=True)
 
-        resp = await soma.open_shade(None)  # type: ignore
-        mocked_response.assert_not_called()
-        assert resp is False
+        assert await soma.open_shade(MAC) is False
+        assert await soma.open_shade(None) is False  # type: ignore
 
-        resp = await soma.close_shade(None)  # type: ignore
-        mocked_response.assert_not_called()
-        assert resp is False
+        assert await soma.close_shade(MAC) is False
+        assert await soma.close_shade(None) is False  # type: ignore
 
-        resp = await soma.stop_shade(None)  # type: ignore
-        mocked_response.assert_not_called()
-        assert resp is False
+        assert await soma.stop_shade(MAC) is False
+        assert await soma.stop_shade(None) is False  # type: ignore
 
-        resp = await soma.get_shade_position(None)  # type: ignore
-        mocked_response.assert_not_called()
-        assert resp is False
+        assert await soma.get_shade_position(MAC) is False
+        assert await soma.get_shade_position(None) is False  # type: ignore
 
-        resp = await soma.set_shade_position(None, 10)  # type: ignore
-        mocked_response.assert_not_called()
-        assert resp is False
+        assert await soma.set_shade_position(None, 10) is False  # type: ignore
+        assert await soma.set_shade_position(MAC, None) is False  # type: ignore
+        assert await soma.set_shade_position(MAC, 10) is False
 
-        resp = await soma.set_shade_position("aa:bb:cc:dd:ee:ff", None)  # type: ignore
-        mocked_response.assert_not_called()
-        assert resp is False
+        assert await soma.get_battery_level(MAC) is False
+        assert await soma.get_battery_level(None) is False  # type: ignore
 
-        resp = await soma.get_battery_level(None)  # type: ignore
-        mocked_response.assert_not_called()
-        assert resp is False
-
-        resp = await soma.get_light_level(None)  # type: ignore
-        mocked_response.assert_not_called()
-        assert resp is False
+        assert await soma.get_light_level(MAC) is False
+        assert await soma.get_light_level(None) is False  # type: ignore

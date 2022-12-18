@@ -6,4 +6,4 @@
 import setuptools
 
 if __name__ == "__main__":
-    setuptools.setup(name="asyncio-soma-connect")
+    setuptools.setup(name="aiosoma")
