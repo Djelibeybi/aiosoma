@@ -2,15 +2,8 @@
 from __future__ import annotations
 
 import datetime
-import logging
-from dataclasses import dataclass
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from .soma_connect import SomaConnect
-
-
-_LOGGER = logging.getLogger(__name__)
+from .soma_connect import SomaConnect
 
 
 def _can_update_light_level(when: datetime.datetime | None, elapsed: int) -> bool:
@@ -22,20 +15,19 @@ def _can_update_light_level(when: datetime.datetime | None, elapsed: int) -> boo
     return bool(now - when > datetime.timedelta(minutes=elapsed))
 
 
-@dataclass
 class SomaShade:
     """Represents a SOMA shade."""
 
     def __init__(
         self,
-        soma_connect: SomaConnect,
+        soma: SomaConnect,
         mac: str,
         name: str,
         type: str,  # pylint: disable=redefined-builtin
         gen: str,
     ) -> None:
         """Initialise the Shade."""
-        self._soma_connect = soma_connect
+        self._soma = soma
         self._mac = mac
         self._name = name
         self._type: str | None = type.capitalize() if type else None
@@ -103,21 +95,21 @@ class SomaShade:
 
     async def open(self) -> bool:
         """Open this shade."""
-        return await self._soma_connect.open_shade(self._mac)
+        return await self._soma.open_shade(self._mac)
 
     async def close(self) -> bool:
         """Close shade."""
-        return await self._soma_connect.close_shade(self._mac)
+        return await self._soma.close_shade(self._mac)
 
     async def stop(self) -> bool:
         """Stop shade."""
-        return await (self._soma_connect.stop_shade(self._mac))
+        return await (self._soma.stop_shade(self._mac))
 
     async def set_position(
         self, position: int, close_upwards: bool = False, morning_mode: bool = False
     ) -> bool:
         """Set shade to specific position."""
-        result = await self._soma_connect.set_shade_position(
+        result = await self._soma.set_shade_position(
             self._mac,
             position,
             close_upwards=close_upwards,
@@ -130,7 +122,7 @@ class SomaShade:
 
     async def get_current_position(self) -> int | None:
         """Update and return shade position."""
-        response = await self._soma_connect.get_shade_position(self._mac)
+        response = await self._soma.get_shade_position(self._mac)
         if response is not False:
             self._position = response
             return self.position
@@ -138,7 +130,7 @@ class SomaShade:
 
     async def get_current_battery_level(self) -> int | None:
         """Get battery level."""
-        response = await self._soma_connect.get_battery_level(self._mac)
+        response = await self._soma.get_battery_level(self._mac)
         if isinstance(response, tuple):
             self._battery_level = response[0]
             self._battery_percentage = response[1]
@@ -151,7 +143,7 @@ class SomaShade:
         # only get a new light level once every 10 minutes
         if _can_update_light_level(self._light_level_last_updated, 10):
             if (
-                light_level := await self._soma_connect.get_light_level(self._mac)
+                light_level := await self._soma.get_light_level(self._mac)
             ) is not False:
                 self._light_level = light_level
                 self._light_level_last_updated = datetime.datetime.now()
