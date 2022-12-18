@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.2 (2022-12-18)
+### Fix
+* Revert list_devices() back to a set of tuples ([`015ae83`](https://github.com/Djelibeybi/aiosoma/commit/015ae83726600acf640c7d7c1f3364dc6e82f53f))
+
 ## v1.1.1 (2022-12-18)
 ### Fix
 * List_devices() no longer returns SomaShade objects ([`2a70db4`](https://github.com/Djelibeybi/aiosoma/commit/2a70db4759c809a766eac74d5c86e0a4f9011dcf))
