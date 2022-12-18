@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.1 (2022-12-18)
+### Fix
+* List_devices() no longer returns SomaShade objects ([`2a70db4`](https://github.com/Djelibeybi/aiosoma/commit/2a70db4759c809a766eac74d5c86e0a4f9011dcf))
+
 ## v1.1.0 (2022-12-18)
 ### Feature
 * Add version property to the SomaConnect class ([`7e1d0dc`](https://github.com/Djelibeybi/aiosoma/commit/7e1d0dc1bfa31185789fa7a8d40245d2cca97e2d))
