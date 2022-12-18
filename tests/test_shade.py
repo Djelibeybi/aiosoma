@@ -1,176 +1,211 @@
 """Tests for aiosoma.Shade class."""
+import datetime
 import random
-from typing import Union
 
+import pytest
 from aioresponses import aioresponses
+from freezegun import freeze_time
 
-from aiosoma import Connect, Shade
-
-from . import HOST, LOOP, MAC, PORT, SUCCESS, URL, gen_shade_state
-
-
-def get_shade(
-    position: Union[int, None] = None,
-    light_level: Union[int, None] = None,
-    battery_level: Union[int, None] = None,
-    battery_percentage: Union[int, None] = None,
-) -> Shade:
-    """Return a shade."""
-    soma = Connect(HOST, PORT)
-    return Shade(
-        soma,
-        name="Lounge",
-        mac="aa:aa:aa:bb:bb:bb",
-        type="shade",
-        gen="2S",
-        position=position,
-        light_level=light_level,
-        battery_level=battery_level,
-        battery_percentage=battery_percentage,
-    )
+from . import MAC, URL, gen_bad_state, gen_shade_state, mocked_shade
 
 
-def test_get_shade_properties():
+def test_class_properties():
+    """Test the SomaShade class properties."""
+    shade = mocked_shade()
+    assert str(shade) == "Lounge: Shade 2S (aa:aa:aa:bb:bb:bb)"
+    assert repr(shade) == "<Lounge Shade 2S (aa:aa:aa:bb:bb:bb)>"
+
+
+@pytest.mark.asyncio()
+async def test_failed_result():
+    """Test failed result from SOMA Connect."""
+    with aioresponses() as mock:
+        shade = mocked_shade()
+        mock.get(f"{URL}/get_shade_state/{MAC}", payload=gen_bad_state())
+        get_current_position = await shade.get_current_position()
+        assert get_current_position is None
+        assert shade.position is None
+
+
+@pytest.mark.asyncio()
+async def test_get_shade_position():
     """Fetch shade properties."""
-    _position = random.randint(0, 100)
-    _light_level = random.randint(0, 6000)
-    _battery_level = random.randint(0, 500)
-    _battery_percentage = random.randint(0, 100)
+    mock_position = random.randint(0, 100)
+    shade = mocked_shade()
 
-    shade = get_shade(
-        position=_position,
-        light_level=_light_level,
-        battery_level=_battery_level,
-        battery_percentage=_battery_percentage,
-    )
-
-    details = {
-        "str": str(shade),
-        "repr": repr(shade),
-        "name": shade.name,
-        "mac": shade.mac,
-        "model": shade.model,
-        "gen": shade.gen,
-        "position": shade.position,
-        "light_level": shade.light_level,
-        "battery_level": shade.battery_level,
-        "battery_percentage": shade.battery_percentage,
-    }
-    assert details == {
-        "str": "Lounge: Shade 2S (aa:aa:aa:bb:bb:bb)",
-        "repr": "<Lounge Shade 2S (aa:aa:aa:bb:bb:bb)>",
-        "name": "Lounge",
-        "mac": "aa:aa:aa:bb:bb:bb",
-        "model": "Shade",
-        "gen": "2S",
-        "position": _position,
-        "light_level": _light_level,
-        "battery_level": _battery_level,
-        "battery_percentage": _battery_percentage,
-    }
+    with aioresponses() as mock:
+        mock.get(
+            f"{URL}/get_shade_state/{MAC}",
+            payload=gen_shade_state(position=mock_position),
+        )
+        await shade.get_current_position()
+        assert shade.position == mock_position
 
 
-def test_shade_open():
+@pytest.mark.asyncio()
+async def test_get_shade_battery_level():
+    """Fetch shade properties."""
+    mock_battery_level = random.randint(0, 500)
+    mock_battery_percentage = random.randint(0, 100)
+    shade = mocked_shade()
+
+    with aioresponses() as mock:
+        mock.get(
+            f"{URL}/get_battery_level/{MAC}",
+            payload=gen_shade_state(
+                battery_level=mock_battery_level,
+                battery_percentage=mock_battery_percentage,
+            ),
+        )
+        await shade.get_current_battery_level()
+        assert shade.battery_level == mock_battery_level
+        assert shade.battery_percentage == mock_battery_percentage
+
+
+@pytest.mark.asyncio()
+async def test_get_shade_light_level():
+    """Fetch shade properties."""
+    mock_light_level = random.randint(0, 6000)
+    shade = mocked_shade()
+
+    with aioresponses() as mock:
+        mock.get(
+            f"{URL}/get_light_level/{MAC}",
+            payload=gen_shade_state(light_level=mock_light_level),
+        )
+        await shade.get_current_light_level()
+        assert shade.light_level == mock_light_level
+
+
+@pytest.mark.asyncio()
+async def test_shade_open():
     """Test Shade.open()."""
     with aioresponses() as mock:
-        shade = get_shade()
-        print(shade, shade.__repr__)
+        shade = mocked_shade()
         mock.get(f"{URL}/open_shade/{MAC}", payload=gen_shade_state())
-        open_shade = LOOP.run_until_complete(shade.open())
-        assert SUCCESS == open_shade
+
+        open_shade = await shade.open()
+        assert open_shade is True
 
 
-def test_shade_close():
+@pytest.mark.asyncio()
+async def test_shade_close():
     """Test Shade.close()."""
     with aioresponses() as mock:
-        shade = get_shade()
+        shade = mocked_shade()
         mock.get(f"{URL}/close_shade/{MAC}", payload=gen_shade_state())
 
-        close_shade = LOOP.run_until_complete(shade.close())
-        assert SUCCESS == close_shade
+        close_shade = await shade.close()
+        assert close_shade is True
 
 
-def test_shade_stop():
+@pytest.mark.asyncio()
+async def test_shade_stop():
     """Test Shade.stop()."""
     with aioresponses() as mock:
-        shade = get_shade()
+        shade = mocked_shade()
         mock.get(f"{URL}/stop_shade/{MAC}", payload=gen_shade_state())
 
-        stop_shade = LOOP.run_until_complete(shade.stop())
-        assert SUCCESS == stop_shade
+        stop_shade = await shade.stop()
+        assert stop_shade is True
 
 
-def test_shade_set_position():
+@pytest.mark.asyncio()
+async def test_shade_set_position():
     """Test Shade.set_position()."""
     with aioresponses() as mock:
-        shade = get_shade()
+        shade = mocked_shade()
         position = random.randint(0, 100)
         mock.get(
             f"{URL}/set_shade_position/{MAC}/{position}",
             payload=gen_shade_state(position=position),
         )
 
-        set_shade_position = LOOP.run_until_complete(
-            shade.set_position(
-                position=position, close_upwards=False, morning_mode=False
-            )
+        set_shade_position = await shade.set_position(
+            position=position, close_upwards=False, morning_mode=False
         )
-        assert isinstance(set_shade_position, dict)
-        _shade_position = set_shade_position.pop("position")
-        assert _shade_position == str(position)
-        assert SUCCESS == set_shade_position
+
+        assert set_shade_position is True
+        assert shade.position == position
 
 
-def test_shade_get_state():
-    """Test Shade.get_state()."""
+@pytest.mark.asyncio()
+async def test_shade_get_position():
+    """Test Shade.get_position()."""
+
     with aioresponses() as mock:
-        shade = get_shade()
-        position = random.randint(0, 100)
-        mock.get(f"{URL}/get_shade_state/{MAC}", payload=gen_shade_state(position))
-        get_state = LOOP.run_until_complete(shade.get_state())
-        assert isinstance(get_state, dict)
-        _get_state_position = get_state.pop("position")
-        assert _get_state_position == str(position)
-        assert SUCCESS == get_state
+        shade = mocked_shade()
+        mock_position = random.randint(0, 100)
+        mock.get(f"{URL}/get_shade_state/{MAC}", payload=gen_shade_state(mock_position))
+
+        get_current_position = await shade.get_current_position()
+        assert isinstance(get_current_position, int)
+        assert shade.position == mock_position
 
 
-def test_shade_get_battery_level():
+@pytest.mark.asyncio()
+async def test_shade_get_battery_level():
     """Test Shade.get_battery_level()."""
     with aioresponses() as mock:
-        shade = get_shade()
-        battery_level = random.randint(0, 500)
-        battery_percentage = random.randint(0, 100)
+        shade = mocked_shade()
+        mock_battery_level = random.randint(0, 500)
+        mock_battery_percentage = random.randint(0, 100)
         mock.get(
             f"{URL}/get_battery_level/{MAC}",
             payload=gen_shade_state(
-                battery_level=battery_level, battery_percentage=battery_percentage
+                battery_level=mock_battery_level,
+                battery_percentage=mock_battery_percentage,
             ),
         )
-        get_battery_level = LOOP.run_until_complete(shade.get_battery_level())
-        assert isinstance(get_battery_level, dict)
+        get_current_battery_level = await shade.get_current_battery_level()
+        assert isinstance(get_current_battery_level, int)
 
-        _level = get_battery_level.pop("battery_level")
-        _percent = get_battery_level.pop("battery_percentage")
-
-        assert _level == str(battery_level)
-        assert _percent == str(battery_percentage)
-
-        assert SUCCESS == get_battery_level
+        assert shade.battery_level == mock_battery_level
+        assert shade.battery_percentage == mock_battery_percentage
 
 
-def test_shade_get_light_level():
+@pytest.mark.asyncio()
+async def test_shade_get_light_level():
     """Test Shade.get_light_level()."""
     with aioresponses() as mock:
-        shade = get_shade()
-        light_level = random.randint(0, 5000)
+        shade = mocked_shade()
+        mock_light_level = random.randint(0, 5000)
 
         mock.get(
             f"{URL}/get_light_level/{MAC}",
-            payload=gen_shade_state(light_level=light_level),
+            payload=gen_shade_state(light_level=mock_light_level),
         )
-        get_light_level = LOOP.run_until_complete(shade.get_light_level())
-        assert isinstance(get_light_level, dict)
+        get_current_light_level = await shade.get_current_light_level()
+        assert isinstance(get_current_light_level, int)
+        assert shade.light_level == mock_light_level
 
-        _level = get_light_level.pop("light_level")
-        assert _level == str(light_level)
-        assert SUCCESS == get_light_level
+
+@pytest.mark.asyncio()
+async def test_shade_get_light_level_limit():
+    """Test Shade.get_light_level() is time limited."""
+    shade = mocked_shade()
+    with aioresponses() as mock:
+        mock_first_light_level = random.randint(0, 5000)
+        mock.get(
+            f"{URL}/get_light_level/{MAC}",
+            payload=gen_shade_state(light_level=mock_first_light_level),
+        )
+
+        get_current_light_level = await shade.get_current_light_level()
+        assert isinstance(get_current_light_level, int)
+        assert shade.light_level == mock_first_light_level
+
+    with aioresponses() as mock, freeze_time(datetime.datetime.now()) as frozen_time:
+        mock_second_light_level = random.randint(0, 5000)
+        mock.get(
+            f"{URL}/get_light_level/{MAC}",
+            payload=gen_shade_state(light_level=mock_second_light_level),
+        )
+
+        frozen_time.tick(datetime.timedelta(minutes=3))
+        await shade.get_current_light_level()
+        assert shade.light_level == mock_first_light_level
+
+        frozen_time.tick(datetime.timedelta(minutes=10))
+        await shade.get_current_light_level()
+        assert shade.light_level == mock_second_light_level

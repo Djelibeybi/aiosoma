@@ -13,9 +13,10 @@ from rich.console import Console
 from rich.pretty import pprint
 from rich.table import Table
 
-from . import Connect, Shade
+from aiosoma import SomaConnect, SomaShade
 
 JSON_OUTPUT: bool = False
+LIVE_UPDATE: bool = True
 
 
 def coro(func: Any) -> Any:
@@ -29,9 +30,9 @@ def coro(func: Any) -> Any:
 
 
 async def get_shade(
-    soma: Connect, mac: str | None = None, name: str | None = None
-) -> Shade | None:
-    """Get Shade from provided parameters."""
+    soma: SomaConnect, mac: str | None = None, name: str | None = None
+) -> SomaShade | None:
+    """Get SomaShade from provided parameters."""
 
     if mac is None and name is None:
         raise click.UsageError("Must provide at least one of --mac or --name")
@@ -48,31 +49,31 @@ async def get_shade(
     return None
 
 
-async def get_shade_from_mac(soma: Connect, mac: str) -> Shade | None:
+async def get_shade_from_mac(soma: SomaConnect, mac: str) -> SomaShade | None:
     """Return shade with specified mac"""
     response = await soma.list_devices()
     if isinstance(response, dict):
         for shade in response.get("shades", {}):
             if shade["mac"] == mac:
-                return Shade(soma, **shade)
+                return SomaShade(soma, **shade)
     return None
 
 
-async def get_shade_from_name(soma: Connect, name: str) -> Shade | None:
+async def get_shade_from_name(soma: SomaConnect, name: str) -> SomaShade | None:
     """Return shade with specified name"""
     response = await soma.list_devices()
     if isinstance(response, dict):
         for device in response.get("shades", {}):
             if device["name"] == name:
-                return Shade(soma, **device)
+                return SomaShade(soma, **device)
     return None
 
 
-def handle_result(result: dict[str, Any] | bool) -> None:
+def handle_result(result: dict[str, Any] | None) -> None:
     """Handle the result."""
     if JSON_OUTPUT is True:
         pprint(result)
-    elif result is False:
+    elif result is None:
         markup("response: [bold red]error[/bold red]")
     elif isinstance(result, dict) and result.get("result", "") == "success":
         markup("response: [bold green]success[/bold green]")
@@ -82,20 +83,24 @@ def handle_result(result: dict[str, Any] | bool) -> None:
 @click.option(
     "--host",
     default="soma-connect",
-    help="Host name or IP address of SOMA Connect.",
+    help="Host name or IP address of SOMA SomaConnect.",
     type=str,
 )
-@click.option("--port", default=3000, help="API port of SOMA Connect", type=int)
+@click.option("--port", default=3000, help="API port of SOMA SomaConnect", type=int)
 @click.option(
     "--json", is_flag=True, default=False, help="Return result in JSON format"
 )
+@click.option(
+    "--live", is_flag=True, default=True, help="Query the device for current value."
+)
 @click.pass_context
-def cli(context: click.Context, host: str, port: int, json: bool) -> None:
+def cli(context: click.Context, host: str, port: int, json: bool, live: bool) -> None:
     """Simple soma CLI interface to control shades."""
-    global JSON_OUTPUT  # pylint: disable=global-statement
+    global JSON_OUTPUT, LIVE_UPDATE  # pylint: disable=global-statement
 
-    context.obj = Connect(host, port)
+    context.obj = SomaConnect(host, port)
     JSON_OUTPUT = json
+    LIVE_UPDATE = live
 
     try:
         ip_addr = socket.gethostbyname(host)
@@ -104,17 +109,14 @@ def cli(context: click.Context, host: str, port: int, json: bool) -> None:
     except socket.gaierror as exc:
         raise click.UsageError(f"{host} not found") from exc
 
-    except ConnectionError as exc:
-        raise click.UsageError(f"unable to connect to {host}:{port}") from exc
-
 
 @cli.command()
 @click.pass_obj
 @coro
-async def list_shades(soma: Connect) -> None:
-    """Output the list of shades discovered by SOMA Connect."""
+async def list_shades(soma: SomaConnect) -> None:
+    """Output the list of shades discovered by SOMA SomaConnect."""
 
-    response: dict[str, Any] | bool = await soma.list_devices()
+    response = await soma.list_devices()
     if isinstance(response, dict):
         if JSON_OUTPUT is True:
             pprint(response)
@@ -122,8 +124,8 @@ async def list_shades(soma: Connect) -> None:
             console = Console()
             table = Table("name", "mac ", "model", "gen", box=box.ASCII)
             for shade in response["shades"]:
-                _shade = Shade(soma, **shade)
-                table.add_row(_shade.name, _shade.mac, _shade.model, _shade.gen)
+                _shade = SomaShade(soma, **shade)
+                table.add_row(_shade.name, _shade.mac, _shade.model[0], _shade.model[1])
             console.print(table)
 
 
@@ -132,10 +134,10 @@ async def list_shades(soma: Connect) -> None:
 @click.option("--name", "-n", help="Name of the shade.", type=str)
 @click.pass_obj
 @coro
-async def open_shade(soma: Connect, mac: str | None, name: str | None) -> None:
+async def open_shade(soma: SomaConnect, mac: str | None, name: str | None) -> None:
     """Open a shade by providing either its MAC address or name."""
 
-    shade: Shade | None = await get_shade(soma, mac, name)
+    shade: SomaShade | None = await get_shade(soma, mac, name)
     if shade is not None:
         handle_result(await shade.open())
 
@@ -145,10 +147,10 @@ async def open_shade(soma: Connect, mac: str | None, name: str | None) -> None:
 @click.option("--name", "-n", help="Name of the shade", type=str)
 @click.pass_obj
 @coro
-async def close_shade(soma: Connect, mac: str | None, name: str | None) -> None:
+async def close_shade(soma: SomaConnect, mac: str | None, name: str | None) -> None:
     """Close a shade by providing either its MAC address or name"""
 
-    shade: Shade | None = await get_shade(soma, mac, name)
+    shade: SomaShade | None = await get_shade(soma, mac, name)
     if shade is not None:
         handle_result(await shade.close())
 
@@ -173,7 +175,7 @@ async def close_shade(soma: Connect, mac: str | None, name: str | None) -> None:
 @click.pass_obj
 @coro
 async def set_position(
-    soma: Connect,
+    soma: SomaConnect,
     position: int,
     upwards: bool,
     slow: bool,
@@ -186,7 +188,7 @@ async def set_position(
     Includes support for opening Tilt shades upwards and for enabling morning
     mode which makes the shade quieter but slower.
     """
-    shade: Shade | None = await get_shade(soma, mac, name)
+    shade: SomaShade | None = await get_shade(soma, mac, name)
     kwargs: dict[str, bool] = {"close_upwards": False, "morning_mode": False}
     if upwards is True:
         kwargs["close_upwards"] = True
@@ -201,11 +203,11 @@ async def set_position(
 @click.option("--name", "-n", help="Name of the shade", type=str)
 @click.pass_obj
 @coro
-async def stop_shade(soma: Connect, mac: str | None, name: str | None) -> None:
+async def stop_shade(soma: SomaConnect, mac: str | None, name: str | None) -> None:
     """
     Stop all motion on the shade
     """
-    shade: Shade | None = await get_shade(soma, mac, name)
+    shade: SomaShade | None = await get_shade(soma, mac, name)
     if shade is not None:
         handle_result(await shade.stop())
 
@@ -215,33 +217,17 @@ async def stop_shade(soma: Connect, mac: str | None, name: str | None) -> None:
 @click.option("--name", "-n", help="Name of the shade", type=str)
 @click.pass_obj
 @coro
-async def get_position(soma: Connect, mac: str | None, name: str | None) -> None:
+async def get_position(soma: SomaConnect, mac: str | None, name: str | None) -> None:
     """Return the current state of a shade"""
 
-    shade: Shade | None = await get_shade(soma, mac, name)
-    if isinstance(shade, Shade):
-        result: dict[str, Any] | bool = await shade.get_state()
+    shade: SomaShade | None = await get_shade(soma, mac, name)
+    if isinstance(shade, SomaShade):
+        result = await shade.get_current_position()
         if isinstance(result, dict):
             if JSON_OUTPUT is True:
-                pprint(result)
+                pprint({"name": shade.name, "mac": shade.mac, "position": result})
             else:
-                _shade = Shade(
-                    soma,
-                    shade.mac,
-                    shade.name,
-                    shade.model,
-                    shade.gen,
-                    position=result["position"],
-                )
-                _position = (
-                    f"{_shade.position}%" if _shade.position is not None else "/a"
-                )
-                console = Console()
-                table = Table(show_header=False, box=box.ASCII)
-                table.add_row("name", _shade.name)
-                table.add_row("mac", _shade.mac)
-                table.add_row("position", _position)
-                console.print(table)
+                pprint(f"{shade.name} ({shade.mac}) position: {result}")
 
 
 @cli.command
@@ -249,42 +235,29 @@ async def get_position(soma: Connect, mac: str | None, name: str | None) -> None
 @click.option("--name", "-n", help="Name of the shade.", type=str)
 @click.pass_obj
 @coro
-async def get_battery_level(soma: Connect, mac: str | None, name: str | None) -> None:
+async def get_battery_level(
+    soma: SomaConnect, mac: str | None, name: str | None
+) -> None:
     """Return the current state of the shade."""
 
-    shade: Shade | None = await get_shade(soma, mac, name)
-    if isinstance(shade, Shade):
-        result: dict[str, Any] | bool = await shade.get_battery_level()
+    shade: SomaShade | None = await get_shade(soma, mac, name)
+    if isinstance(shade, SomaShade):
+        result = await shade.get_current_battery_level()
         if isinstance(result, dict):
             if JSON_OUTPUT is True:
-                pprint(result)
+                pprint(
+                    {
+                        "name": shade.name,
+                        "mac": shade.mac,
+                        "battery_level": shade.battery_level,
+                        "battery_percentage": shade.battery_percentage,
+                    }
+                )
             else:
-                _shade = Shade(
-                    soma,
-                    shade.mac,
-                    shade.name,
-                    shade.model,
-                    shade.gen,
-                    battery_level=result["battery_level"],
-                    battery_percentage=result["battery_percentage"],
-                )
-                _battery_level = (
-                    f"{_shade.battery_level}"
-                    if _shade.battery_level is not None
-                    else "n/a"
-                )
-                _battery_percentage = (
-                    f"{_shade.battery_percentage}%"
-                    if _shade.battery_percentage is not None
-                    else "n/a"
-                )
-                console = Console()
-                table = Table(show_header=False, box=box.ASCII)
-                table.add_row("name", _shade.name)
-                table.add_row("mac", _shade.mac)
-                table.add_row("battery lvl", _battery_level)
-                table.add_row("battery %", _battery_percentage)
-                console.print(table)
+                _battery_level = shade.battery_level or "n/a"
+                _battery_percentage = shade.battery_percentage or "n/a"
+                pprint(f"{shade.name} ({shade.mac}) level: {_battery_level}")
+                pprint(f"{shade.name} ({shade.mac}) percentage: {_battery_percentage}")
 
 
 @cli.command
@@ -292,17 +265,17 @@ async def get_battery_level(soma: Connect, mac: str | None, name: str | None) ->
 @click.option("--name", "-n", help="Name of the shade", type=str)
 @click.pass_obj
 @coro
-async def get_light_level(soma: Connect, mac: str | None, name: str | None) -> None:
+async def get_light_level(soma: SomaConnect, mac: str | None, name: str | None) -> None:
     """Return the current state of a shade"""
 
-    shade: Shade | None = await get_shade(soma, mac, name)
-    if isinstance(shade, Shade):
-        result: dict[str, Any] | bool = await shade.get_light_level()
+    shade: SomaShade | None = await get_shade(soma, mac, name)
+    if isinstance(shade, SomaShade):
+        result = await shade.get_current_light_level()
         if isinstance(result, dict):
             if JSON_OUTPUT is True:
                 pprint(result)
             else:
-                _shade = Shade(
+                _shade = SomaShade(
                     soma,
                     shade.mac,
                     shade.name,
