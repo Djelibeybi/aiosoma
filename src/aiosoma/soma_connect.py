@@ -24,10 +24,10 @@ class SomaConnect:
         self._port = port
         self._url = f"http://{host}:{port}"
         self._version: str = ""
-        self._devices: list[dict[str, str]] = []
+        self._devices: set[tuple[str, str, str, str]] = set()
 
     @property
-    def devices(self) -> list[dict[str, str]] | None:
+    def devices(self) -> list[tuple[str, str, str, str]] | None:
         """Return a list of discovered shades."""
         if len(self._devices) > 0:
             return [device for device in self._devices]
@@ -60,18 +60,13 @@ class SomaConnect:
 
                 return json
 
-    async def list_devices(self) -> list[dict[str, str]] | None:
+    async def list_devices(self) -> list[tuple[str, str, str, str]] | None:
         """Return list of devices."""
         result = await self._get("list_devices")
         if (devices := result.get("shades", None)) is not None and len(devices) > 0:
             for device in devices:
-                self._devices.append(
-                    {
-                        "name": device["name"],
-                        "mac": device["mac"],
-                        "type": device["type"],
-                        "gen": device["gen"],
-                    }
+                self._devices.add(
+                    (device["name"], device["mac"], device["type"], device["gen"])
                 )
 
             return self.devices

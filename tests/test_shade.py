@@ -20,12 +20,20 @@ from . import (
 )
 
 
-def test_somashade_class_properties():
+def test_somashades_from_list_devices():
     """Test the SomaShade class properties."""
 
     shades: set[SomaShade] = set()
     for device in DEVICE_LIST:
-        shades.add(SomaShade(mocked_connect(), **device))
+        shades.add(
+            SomaShade(
+                mocked_connect(),
+                name=device[0],
+                mac=device[1],
+                type=device[2],
+                gen=device[3],
+            )
+        )
 
     for shade in shades:
 

@@ -19,10 +19,10 @@ GEN = "2S"
 LOOP = asyncio.get_event_loop()
 
 
-DEVICE_LIST: list[dict[str, str]] = [
-    {"name": "Lounge", "mac": "aa:aa:aa:bb:bb:bb", "type": "shade", "gen": "2S"},
-    {"name": "Kitchen", "mac": "cc:cc:cc:dd:dd:dd", "type": "shade", "gen": "2S"},
-    {"name": "Bedroom", "mac": "ee:ee:ee:ff:ff:ff", "type": "shade", "gen": "2"},
+DEVICE_LIST: list[tuple[str, str, str, str]] = [
+    ("Lounge", "aa:aa:aa:bb:bb:bb", "shade", "2S"),
+    ("Kitchen", "cc:cc:cc:dd:dd:dd", "shade", "2S"),
+    ("Bedroom", "ee:ee:ee:ff:ff:ff", "shade", "2"),
 ]
 
 LIST_DEVICES_PAYLOAD = {
