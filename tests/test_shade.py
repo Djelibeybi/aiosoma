@@ -6,18 +6,42 @@ import pytest
 from aioresponses import aioresponses
 from freezegun import freeze_time
 
-from . import MAC, URL, gen_bad_state, gen_shade_state, mocked_bad_shade, mocked_shade
+from aiosoma import SomaShade
+
+from . import (
+    DEVICE_LIST,
+    MAC,
+    URL,
+    gen_bad_state,
+    gen_shade_state,
+    mocked_bad_shade,
+    mocked_connect,
+    mocked_shade,
+)
 
 
-def test_class_properties():
+def test_somashade_class_properties():
     """Test the SomaShade class properties."""
-    shade = mocked_shade()
-    assert str(shade) == "Lounge: Shade 2S (aa:aa:aa:bb:bb:bb)"
-    assert repr(shade) == "<Lounge Shade 2S (aa:aa:aa:bb:bb:bb)>"
+
+    shades: set[SomaShade] = set()
+    for device in DEVICE_LIST:
+        shades.add(SomaShade(mocked_connect(), **device))
+
+    for shade in shades:
+
+        if shade.name == "Lounge":
+            assert str(shade) == "Lounge: Shade 2S (aa:aa:aa:bb:bb:bb)"
+            assert repr(shade) == "<Lounge Shade 2S (aa:aa:aa:bb:bb:bb)>"
+        elif shade.name == "Kitchen":
+            assert str(shade) == "Kitchen: Shade 2S (cc:cc:cc:dd:dd:dd)"
+            assert repr(shade) == "<Kitchen Shade 2S (cc:cc:cc:dd:dd:dd)>"
+        elif shade.name == "Bedroom":
+            assert str(shade) == "Bedroom: Shade 2 (ee:ee:ee:ff:ff:ff)"
+            assert repr(shade) == "<Bedroom Shade 2 (ee:ee:ee:ff:ff:ff)>"
 
 
 @pytest.mark.asyncio()
-async def test_failed_result():
+async def test_bad_response():
     """Test failed result from SOMA Connect."""
     with aioresponses() as mock:
         shade = mocked_shade()

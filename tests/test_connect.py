@@ -8,11 +8,11 @@ from aioresponses import aioresponses
 from aiosoma import SomaConnect
 
 from . import (
+    DEVICE_LIST,
     HOST,
     LIST_DEVICES_PAYLOAD,
     MAC,
     PORT,
-    SHADE_LIST,
     URL,
     gen_bad_state,
     gen_shade_state,
@@ -41,7 +41,7 @@ async def test_list_devices():
         )
         response = await soma.list_devices()
         assert isinstance(response, list)
-        assert (shade in SHADE_LIST for shade in response)
+        assert (device in DEVICE_LIST for device in response)
         mocked_response.assert_called_once()
 
 
@@ -53,7 +53,7 @@ async def test_failed_list_devices():
         mocked_response.get(f"{URL}/list_devices", payload=gen_bad_state())
         shade_list = await soma.list_devices()
         assert shade_list is None
-        assert soma.shades is None
+        assert soma.devices is None
 
 
 @pytest.mark.asyncio()
