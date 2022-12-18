@@ -2,6 +2,7 @@
 
 import asyncio
 from typing import Optional
+from unittest.mock import AsyncMock
 
 from aiosoma import SomaConnect, SomaShade
 
@@ -57,9 +58,25 @@ def mocked_connect() -> SomaConnect:
     return connect
 
 
+def mocked_bad_connect() -> SomaConnect:
+    """Mocked bad SOMA Connect."""
+    connect = SomaConnect(HOST, PORT)
+    connect.list_devices = AsyncMock(return_value=None)  # type: ignore
+    connect.get_shade_position = AsyncMock(return_value=False)  # type: ignore
+    connect.get_battery_level = AsyncMock(return_value=False)  # type: ignore
+    connect.get_light_level = AsyncMock(return_value=False)  # type: ignore
+    return connect
+
+
 def mocked_shade() -> SomaShade:
     """Mocked SOMA Shade."""
     shade = SomaShade(mocked_connect(), MAC, NAME, TYPE, GEN)
+    return shade
+
+
+def mocked_bad_shade() -> SomaShade:
+    """Mocked bad shade."""
+    shade = SomaShade(mocked_bad_connect(), None, None, None, None)  # type: ignore
     return shade
 
 

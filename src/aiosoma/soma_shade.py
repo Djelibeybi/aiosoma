@@ -31,15 +31,15 @@ class SomaShade:
         soma_connect: SomaConnect,
         mac: str,
         name: str,
-        type: str,  # pylint: disable=W0622
+        type: str,  # pylint: disable=redefined-builtin
         gen: str,
     ) -> None:
         """Initialise the Shade."""
         self._soma_connect = soma_connect
         self._mac = mac
         self._name = name
-        self._type: str = type.capitalize()
-        self._gen: str = gen
+        self._type: str | None = type.capitalize() if type else None
+        self._gen: str | None = gen or None
         self._position: int | None = None
         self._battery_level: int | None = None
         self._battery_percentage: int | None = None
@@ -69,7 +69,7 @@ class SomaShade:
         return self._mac
 
     @property
-    def model(self) -> tuple[str, str]:
+    def model(self) -> tuple[str | None, str | None]:
         """Return the model (type, gen) of the shade."""
         return (self._type, self._gen)
 
@@ -150,9 +150,14 @@ class SomaShade:
 
         # only get a new light level once every 10 minutes
         if _can_update_light_level(self._light_level_last_updated, 10):
-            self._light_level = await self._soma_connect.get_light_level(self._mac)
-            self._light_level_last_updated = datetime.datetime.now()
-            return self.light_level
+            if (
+                light_level := await self._soma_connect.get_light_level(self._mac)
+            ) is not False:
+                self._light_level = light_level
+                self._light_level_last_updated = datetime.datetime.now()
+                return self.light_level
+
+            return None
 
         if self._light_level is not None:
             return self.light_level

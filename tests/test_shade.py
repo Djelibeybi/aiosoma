@@ -6,7 +6,7 @@ import pytest
 from aioresponses import aioresponses
 from freezegun import freeze_time
 
-from . import MAC, URL, gen_bad_state, gen_shade_state, mocked_shade
+from . import MAC, URL, gen_bad_state, gen_shade_state, mocked_bad_shade, mocked_shade
 
 
 def test_class_properties():
@@ -209,3 +209,33 @@ async def test_shade_get_light_level_limit():
         frozen_time.tick(datetime.timedelta(minutes=10))
         await shade.get_current_light_level()
         assert shade.light_level == mock_second_light_level
+
+
+@pytest.mark.asyncio()
+async def test_shade_failures():
+    """Test code paths when things fail."""
+    shade = mocked_bad_shade()
+
+    assert shade.battery_level is None
+    assert shade.battery_percentage is None
+    assert shade.position is None
+    assert shade.light_level is None
+
+    await shade.get_current_battery_level()
+    assert shade.battery_level is None
+    assert shade.battery_percentage is None
+
+    await shade.get_current_position()
+    assert shade.position is None
+
+    await shade.get_current_light_level()
+    assert shade.light_level is None
+
+    shade._light_level_last_updated = (  # pylint: disable=protected-access
+        datetime.datetime.now()
+    )
+
+    with freeze_time(datetime.datetime.now()) as frozen_time:
+        frozen_time.tick(datetime.timedelta(minutes=3))
+        await shade.get_current_light_level()
+        assert shade.light_level is None

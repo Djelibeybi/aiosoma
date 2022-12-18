@@ -16,6 +16,8 @@ from . import (
     URL,
     gen_bad_state,
     gen_shade_state,
+    mocked_bad_connect,
+    mocked_connect,
 )
 
 
@@ -23,10 +25,18 @@ from . import (
 async def test_failed_get():
     """Test soma.set_shade_position()."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         mocked_response.get(f"{URL}/open_shade/{MAC}", payload=gen_bad_state())
         open_shade = await soma.open_shade(MAC)
         assert open_shade is False
+
+
+@pytest.mark.asyncio()
+async def test_failed_soma_connect():
+    """Test failure cases for SOMA Connect."""
+    soma = mocked_bad_connect()
+    await soma.list_devices()
+    assert soma.shades is None
 
 
 @pytest.mark.asyncio()
