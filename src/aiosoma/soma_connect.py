@@ -26,6 +26,7 @@ class SomaConnect:
         self._port = port
         self._url = f"http://{host}:{port}"
         self._shades: set[SomaShade] = set()
+        self._version: str = ""
 
     @property
     def shades(self) -> list[SomaShade] | None:
@@ -33,6 +34,11 @@ class SomaConnect:
         if len(self._shades) > 0:
             return list(self._shades)
         return None
+
+    @property
+    def version(self) -> str:
+        """Return the SOMA Connect version."""
+        return self._version
 
     @backoff.on_exception(
         backoff.expo, aiohttp.ClientError, max_tries=3, logger=_LOGGER
@@ -44,12 +50,15 @@ class SomaConnect:
 
         async with aiohttp.ClientSession(raise_for_status=False) as session:
             async with session.get(url, params=params) as response:
-                json: dict[str, Any] = await response.json()
-                result = json.get("result", {})
+                json: dict[str, str] = await response.json()
+                result: str = json.get("result", "")
 
                 if result == "error":
                     json.pop("version", None)
                     json.pop("mac", None)
+
+                if (version := json.get("version", None)) is not None:
+                    self._version = version
 
                 return json
 

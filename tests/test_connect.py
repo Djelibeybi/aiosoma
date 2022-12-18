@@ -21,14 +21,13 @@ from . import (
 
 
 @pytest.mark.asyncio()
-async def test_failed_list_devices():
-    """Test failed response to list_devices request."""
+async def test_soma_connect_version():
+    """Test the version property is returned."""
     with aioresponses() as mocked_response:
         soma = mocked_connect()
-        mocked_response.get(f"{URL}/list_devices", payload=gen_bad_state())
-        shade_list = await soma.list_devices()
-        assert shade_list is None
-        assert soma.shades is None
+        mocked_response.get(f"{URL}/list_devices", payload=LIST_DEVICES_PAYLOAD)
+        await soma.list_devices()
+        assert soma.version == "2.3.1"
 
 
 @pytest.mark.asyncio()
@@ -44,6 +43,17 @@ async def test_list_devices():
         assert isinstance(response, list)
         assert (shade in SHADE_LIST for shade in response)
         mocked_response.assert_called_once()
+
+
+@pytest.mark.asyncio()
+async def test_failed_list_devices():
+    """Test failed response to list_devices request."""
+    with aioresponses() as mocked_response:
+        soma = mocked_connect()
+        mocked_response.get(f"{URL}/list_devices", payload=gen_bad_state())
+        shade_list = await soma.list_devices()
+        assert shade_list is None
+        assert soma.shades is None
 
 
 @pytest.mark.asyncio()
