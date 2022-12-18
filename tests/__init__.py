@@ -19,14 +19,11 @@ GEN = "2S"
 LOOP = asyncio.get_event_loop()
 
 
-SHADE_LIST: set[SomaShade] = {
-    SomaShade(SomaConnect(HOST, PORT), shade[0], shade[1], shade[2], shade[3])
-    for shade in [
-        ("aa:aa:aa:bb:bb:bb", "Lounge", "shade", "2S"),
-        ("cc:cc:cc:dd:dd:dd", "Kitchen", "shade", "2S"),
-        ("ee:ee:ee:ff:ff:ff", "Bedroom", "shade", "2"),
-    ]
-}
+DEVICE_LIST: list[dict[str, str]] = [
+    {"name": "Lounge", "mac": "aa:aa:aa:bb:bb:bb", "type": "shade", "gen": "2S"},
+    {"name": "Kitchen", "mac": "cc:cc:cc:dd:dd:dd", "type": "shade", "gen": "2S"},
+    {"name": "Bedroom", "mac": "ee:ee:ee:ff:ff:ff", "type": "shade", "gen": "2"},
+]
 
 LIST_DEVICES_PAYLOAD = {
     "result": "success",
