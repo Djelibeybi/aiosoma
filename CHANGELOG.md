@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v1.0.0 (2022-12-18)
+### Feature
+* Limit calls to get_light_level to once per 10 minutes ([`08dac2b`](https://github.com/Djelibeybi/aiosoma/commit/08dac2b5c49690cb858f3b0a544117bfb11a8c19))
+
+### Fix
+* Resolve type issues and improve code coverage by tests ([`55930b5`](https://github.com/Djelibeybi/aiosoma/commit/55930b51353fadd8cd23ffb7afef0dbc903344b1))
+
+### Breaking
+* class names have changed as follows: ([`08dac2b`](https://github.com/Djelibeybi/aiosoma/commit/08dac2b5c49690cb858f3b0a544117bfb11a8c19))
+
 ## v0.2.2 (2022-12-17)
 ### Fix
 * Downgrade aiohttp to suitable version for Home Assistant ([`b02a602`](https://github.com/Djelibeybi/aiosoma/commit/b02a602e6f9d29bbe7680bd304f838e0164e4b3c))
