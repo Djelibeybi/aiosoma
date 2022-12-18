@@ -7,8 +7,6 @@ from typing import Any
 import aiohttp
 import backoff
 
-from .soma_shade import SomaShade
-
 _LOGGER = logging.getLogger(__name__)
 
 
@@ -25,14 +23,14 @@ class SomaConnect:
         self._host = host.removeprefix("http://")
         self._port = port
         self._url = f"http://{host}:{port}"
-        self._shades: set[SomaShade] = set()
         self._version: str = ""
+        self._devices: list[dict[str, str]] = []
 
     @property
-    def shades(self) -> list[SomaShade] | None:
+    def devices(self) -> list[dict[str, str]] | None:
         """Return a list of discovered shades."""
-        if len(self._shades) > 0:
-            return list(self._shades)
+        if len(self._devices) > 0:
+            return [device for device in self._devices]
         return None
 
     @property
@@ -62,14 +60,21 @@ class SomaConnect:
 
                 return json
 
-    async def list_devices(self) -> list[SomaShade] | None:
+    async def list_devices(self) -> list[dict[str, str]] | None:
         """Return list of devices."""
         result = await self._get("list_devices")
-        if (shades := result.get("shades", None)) is not None and len(shades) > 0:
-            for shade in shades:
-                self._shades.add(SomaShade(self, **shade))
+        if (devices := result.get("shades", None)) is not None and len(devices) > 0:
+            for device in devices:
+                self._devices.append(
+                    {
+                        "name": device["name"],
+                        "mac": device["mac"],
+                        "type": device["type"],
+                        "gen": device["gen"],
+                    }
+                )
 
-            return self.shades
+            return self.devices
 
         return None
 
