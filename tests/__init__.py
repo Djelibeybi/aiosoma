@@ -3,12 +3,29 @@
 import asyncio
 from typing import Optional
 
-MAC = "aa:aa:aa:bb:bb:bb"
+from aiosoma import SomaConnect, SomaShade
+
 HOST = "soma-connect.local"
 PORT = 3000
 URL = f"http://{HOST}:{PORT}"
 
+MAC = "aa:aa:aa:bb:bb:bb"
+NAME = "Lounge"
+TYPE = "shade"
+GEN = "2S"
+
+
 LOOP = asyncio.get_event_loop()
+
+
+SHADE_LIST: set[SomaShade] = {
+    SomaShade(SomaConnect(HOST, PORT), shade[0], shade[1], shade[2], shade[3])
+    for shade in [
+        ("aa:aa:aa:bb:bb:bb", "Lounge", "shade", "2S"),
+        ("cc:cc:cc:dd:dd:dd", "Kitchen", "shade", "2S"),
+        ("ee:ee:ee:ff:ff:ff", "Bedroom", "shade", "2"),
+    ]
+}
 
 LIST_DEVICES_PAYLOAD = {
     "result": "success",
@@ -32,6 +49,18 @@ LIST_DEVICES_PAYLOAD = {
 
 SUCCESS = {"result": "success", "version": "2.3.1", "mac": "aa:aa:aa:bb:bb:bb"}
 FAILURE = {"result": "error", "msg": "NOSHADEWITHMAC"}
+
+
+def mocked_connect() -> SomaConnect:
+    """Mocked SOMA Connect."""
+    connect = SomaConnect(HOST, PORT)
+    return connect
+
+
+def mocked_shade() -> SomaShade:
+    """Mocked SOMA Shade."""
+    shade = SomaShade(mocked_connect(), MAC, NAME, TYPE, GEN)
+    return shade
 
 
 def gen_bad_state() -> dict[str, str]:
