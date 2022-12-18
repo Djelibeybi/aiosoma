@@ -5,14 +5,10 @@ import re
 import pytest
 from aioresponses import aioresponses
 
-from aiosoma import SomaConnect
-
 from . import (
     DEVICE_LIST,
-    HOST,
     LIST_DEVICES_PAYLOAD,
     MAC,
-    PORT,
     URL,
     gen_bad_state,
     gen_shade_state,
@@ -34,7 +30,7 @@ async def test_soma_connect_version():
 async def test_list_devices():
     """Test soma.list_devices()."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         mocked_response.get(
             f"{URL}/list_devices",
             payload=LIST_DEVICES_PAYLOAD,
@@ -43,6 +39,23 @@ async def test_list_devices():
         assert isinstance(response, list)
         assert (device in DEVICE_LIST for device in response)
         mocked_response.assert_called_once()
+
+
+@pytest.mark.asyncio()
+async def test_somaconnect_one_device_per_shade():
+    """Test soma.list_devices() creates one device per shade."""
+    soma = mocked_connect()
+
+    duplicated_shades = LIST_DEVICES_PAYLOAD.copy()
+    shade_list: list[dict[str, str]] = duplicated_shades["shades"]  # type: ignore
+    shade_list.extend(shade_list.copy())
+    duplicated_shades["shades"] = shade_list
+    with aioresponses() as mocked_response:
+        mocked_response.get(f"{URL}/list_devices", payload=duplicated_shades)
+        response = await soma.list_devices()
+        assert len(duplicated_shades["shades"]) == 6
+        assert isinstance(response, list)
+        assert len(response) == 3
 
 
 @pytest.mark.asyncio()
@@ -60,7 +73,7 @@ async def test_failed_list_devices():
 async def test_open_shade():
     """Test soma.open_shade()."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         mocked_response.get(f"{URL}/open_shade/{MAC}", payload=gen_shade_state())
         response = await soma.open_shade(MAC)
         assert response is True
@@ -71,7 +84,7 @@ async def test_open_shade():
 async def test_close_shade():
     """Test soma.close_shade()."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         mocked_response.get(f"{URL}/close_shade/{MAC}", payload=gen_shade_state())
         response = await soma.close_shade(MAC)
         assert response is True
@@ -82,7 +95,7 @@ async def test_close_shade():
 async def test_stop_shade():
     """Test soma.stop_shade()."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         mocked_response.get(f"{URL}/stop_shade/{MAC}", payload=gen_shade_state())
         response = await soma.stop_shade(MAC)
         assert response is True
@@ -93,7 +106,7 @@ async def test_stop_shade():
 async def test_get_shade_state():
     """Test soma.get_shade_state()."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         position = random.randint(0, 100)
         mocked_response.get(
             f"{URL}/get_shade_state/{MAC}", payload=gen_shade_state(position)
@@ -107,7 +120,7 @@ async def test_get_shade_state():
 async def test_set_shade_position():
     """Test soma.set_shade_position()."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         position = random.randint(0, 100)
         mocked_response.get(
             f"{URL}/set_shade_position/{MAC}/{position}", payload=gen_shade_state()
@@ -128,7 +141,7 @@ async def test_set_shade_position():
 async def test_set_shade_position_options():
     """Test soma.set_shade_position() with open_upwards."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         position = random.randint(0, 100)
         mocked_response.get(
             f"{URL}/set_shade_position/{MAC}/{position}?close_upwards=1&morning_mode=1",
@@ -152,7 +165,7 @@ async def test_set_shade_position_options():
 async def test_set_shade_position_below_zero():
     """Test soma.set_shade_position() with position < 0."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         mocked_response.get(
             f"{URL}/set_shade_position/{MAC}/0", payload=gen_shade_state()
         )
@@ -166,7 +179,7 @@ async def test_set_shade_position_below_zero():
 async def test_set_shade_position_above_100():
     """Test soma.set_shade_position() with position > 100."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         mocked_response.get(
             f"{URL}/set_shade_position/{MAC}/100", payload=gen_shade_state()
         )
@@ -180,7 +193,7 @@ async def test_set_shade_position_above_100():
 async def test_get_battery_level():
     """Test soma.get_battery_level()."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         battery_level = random.randint(0, 500)
         battery_percentage = random.randint(0, 100)
         mocked_response.get(
@@ -200,7 +213,7 @@ async def test_get_battery_level():
 async def test_get_light_level():
     """Test soma.get_light_level()."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
         light_level = random.randint(0, 6000)
         mocked_response.get(
             f"{URL}/get_light_level/{MAC}",
@@ -215,7 +228,7 @@ async def test_get_light_level():
 async def test_without_mac():
     """Test soma with mac == None."""
     with aioresponses() as mocked_response:
-        soma = SomaConnect(HOST, PORT)
+        soma = mocked_connect()
 
         pattern = re.compile(r"^http://soma-connect\.local\:3000/.*$")
         mocked_response.get(pattern, payload=gen_bad_state(), repeat=True)
