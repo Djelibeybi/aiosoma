@@ -1,2 +1,11 @@
 [run]
 omit = src/aiosoma/__cli__.py
+branch = true
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if TYPE_CHECKING:
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError

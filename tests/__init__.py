@@ -65,6 +65,7 @@ def mocked_bad_connect() -> SomaConnect:
     connect.get_shade_position = AsyncMock(return_value=False)  # type: ignore
     connect.get_battery_level = AsyncMock(return_value=False)  # type: ignore
     connect.get_light_level = AsyncMock(return_value=False)  # type: ignore
+    connect.set_shade_position = AsyncMock(return_value=False)  # type: ignore
     return connect
 
 
