@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.0 (2022-12-18)
+### Feature
+* Add version property to the SomaConnect class ([`7e1d0dc`](https://github.com/Djelibeybi/aiosoma/commit/7e1d0dc1bfa31185789fa7a8d40245d2cca97e2d))
+
 ## v1.0.0 (2022-12-18)
 ### Feature
 * Limit calls to get_light_level to once per 10 minutes ([`08dac2b`](https://github.com/Djelibeybi/aiosoma/commit/08dac2b5c49690cb858f3b0a544117bfb11a8c19))
