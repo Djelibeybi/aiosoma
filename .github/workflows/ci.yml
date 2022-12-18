@@ -10,6 +10,7 @@ on:
       - "tests/**"
       - "pyproject.toml"
       - "poetry.lock"
+      - "**/*.md"
   pull_request:
     paths:
       - "src/**"
@@ -17,6 +18,7 @@ on:
       - "tests/**"
       - "pyproject.toml"
       - "poetry.lock"
+      - "**/*.md"
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
