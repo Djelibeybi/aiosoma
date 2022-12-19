@@ -6,15 +6,6 @@ import datetime
 from .soma_connect import SomaConnect
 
 
-def _can_update_light_level(when: datetime.datetime | None, elapsed: int) -> bool:
-    """Return true if at lesat elapsed minutes have passed since when."""
-    if when is None:
-        return True
-
-    now = datetime.datetime.now()
-    return bool(now - when > datetime.timedelta(minutes=elapsed))
-
-
 class SomaShade:
     """Represents a SOMA shade."""
 
@@ -138,20 +129,28 @@ class SomaShade:
         return None
 
     async def get_current_light_level(self) -> int | None:
-        """Get light level."""
+        """
+        Asks SOMA Connect to retrieve the light level from the motor at
+        most once every ten minutes.
 
-        # only get a new light level once every 10 minutes
-        if _can_update_light_level(self._light_level_last_updated, 10):
-            if (
-                light_level := await self._soma.get_light_level(self._mac)
-            ) is not False:
-                self._light_level = light_level
-                self._light_level_last_updated = datetime.datetime.now()
-                return self.light_level
+        The rate limiting is done to minimise the impact on the battery life
+        of each motor as the request has to be made using an active Bluetooth
+        connection.
+        """
 
-            return None
+        # only update the light level value if there is no current value
+        # or if there is a value, at most once every 10 minutes
+        if (
+            self._light_level is None
+            or self._light_level_last_updated is None
+            or (
+                datetime.datetime.now() - self._light_level_last_updated
+                > datetime.timedelta(minutes=10)
+            )
+        ):
 
-        if self._light_level is not None:
-            return self.light_level
+            light_level = await self._soma.get_light_level(self._mac)
+            self._light_level = light_level
+            self._light_level_last_updated = datetime.datetime.now()
 
-        return None
+        return self.light_level

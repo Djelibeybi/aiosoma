@@ -59,10 +59,10 @@ def mocked_bad_connect() -> SomaConnect:
     """Mocked bad SOMA Connect."""
     connect = SomaConnect(HOST, PORT)
     connect.list_devices = AsyncMock(return_value=None)  # type: ignore
+    connect.set_shade_position = AsyncMock(return_value=False)  # type: ignore
     connect.get_shade_position = AsyncMock(return_value=False)  # type: ignore
     connect.get_battery_level = AsyncMock(return_value=False)  # type: ignore
-    connect.get_light_level = AsyncMock(return_value=False)  # type: ignore
-    connect.set_shade_position = AsyncMock(return_value=False)  # type: ignore
+    connect.get_light_level = AsyncMock(return_value=None)  # type: ignore
     return connect
 
 

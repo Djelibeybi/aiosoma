@@ -138,11 +138,11 @@ class SomaConnect:
                 return (battery_level, battery_percentage)
         return False
 
-    async def get_light_level(self, mac: str) -> int | bool:
+    async def get_light_level(self, mac: str) -> int | None:
         """Get light level."""
         if mac is not None:
             result = await self._get(f"get_light_level/{mac}")
             if result.get("result", None) == "success":
                 light_level = result.get("light_level", False)
                 return light_level
-        return False
+        return None

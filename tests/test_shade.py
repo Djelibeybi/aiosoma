@@ -228,19 +228,33 @@ async def test_shade_get_light_level_limit():
         assert shade.light_level == mock_first_light_level
 
     with aioresponses() as mock, freeze_time(datetime.datetime.now()) as frozen_time:
-        mock_second_light_level = random.randint(0, 5000)
+        level1 = random.randint(0, 5000)
+        level2 = random.randint(0, 5000)
+
         mock.get(
             f"{URL}/get_light_level/{MAC}",
-            payload=gen_shade_state(light_level=mock_second_light_level),
+            payload=gen_shade_state(light_level=level1),
+        )
+        mock.get(
+            f"{URL}/get_light_level/{MAC}",
+            payload=gen_shade_state(light_level=level2),
         )
 
+        # get the previous value and assert that no request was made.
         frozen_time.tick(datetime.timedelta(minutes=3))
         await shade.get_current_light_level()
         assert shade.light_level == mock_first_light_level
+        mock.assert_not_called()
 
+        # get the next value
         frozen_time.tick(datetime.timedelta(minutes=10))
         await shade.get_current_light_level()
-        assert shade.light_level == mock_second_light_level
+        assert shade.light_level == level1
+
+        # and another value
+        frozen_time.tick(datetime.timedelta(minutes=20))
+        await shade.get_current_light_level()
+        assert shade.light_level == level2
 
 
 @pytest.mark.asyncio()
