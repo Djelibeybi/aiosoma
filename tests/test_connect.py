@@ -252,5 +252,5 @@ async def test_without_mac():
         assert await soma.get_battery_level(MAC) is False
         assert await soma.get_battery_level(None) is False  # type: ignore
 
-        assert await soma.get_light_level(MAC) is False
-        assert await soma.get_light_level(None) is False  # type: ignore
+        assert await soma.get_light_level(MAC) is None
+        assert await soma.get_light_level(None) is None  # type: ignore
