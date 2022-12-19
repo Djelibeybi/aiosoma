@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.3 (2022-12-19)
+### Fix
+* Make get_light_level fetch a value before being rate limited ([`7975cd9`](https://github.com/Djelibeybi/aiosoma/commit/7975cd93813a0810e8b53da59bbac01c7b0b7f54))
+
 ## v1.1.2 (2022-12-18)
 ### Fix
 * Revert list_devices() back to a set of tuples ([`015ae83`](https://github.com/Djelibeybi/aiosoma/commit/015ae83726600acf640c7d7c1f3364dc6e82f53f))
