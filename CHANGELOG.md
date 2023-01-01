@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.4 (2023-01-01)
+### Fix
+* **deps:** Update dependency rich to v13 ([`35d07b5`](https://github.com/Djelibeybi/aiosoma/commit/35d07b543c66354ed02efa772e697f8a4957e0dc))
+
 ## v1.1.3 (2022-12-19)
 ### Fix
 * Make get_light_level fetch a value before being rate limited ([`7975cd9`](https://github.com/Djelibeybi/aiosoma/commit/7975cd93813a0810e8b53da59bbac01c7b0b7f54))
