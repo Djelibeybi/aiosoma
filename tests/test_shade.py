@@ -36,7 +36,6 @@ def test_somashades_from_list_devices():
         )
 
     for shade in shades:
-
         if shade.name == "Lounge":
             assert str(shade) == "Lounge: Shade 2S (aa:aa:aa:bb:bb:bb)"
             assert repr(shade) == "<Lounge Shade 2S (aa:aa:aa:bb:bb:bb)>"
