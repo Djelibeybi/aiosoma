@@ -94,7 +94,7 @@ class SomaShade:
 
     async def stop(self) -> bool:
         """Stop shade."""
-        return await (self._soma.stop_shade(self._mac))
+        return await self._soma.stop_shade(self._mac)
 
     async def set_position(
         self, position: int, close_upwards: bool = False, morning_mode: bool = False
@@ -148,7 +148,6 @@ class SomaShade:
                 > datetime.timedelta(minutes=10)
             )
         ):
-
             light_level = await self._soma.get_light_level(self._mac)
             self._light_level = light_level
             self._light_level_last_updated = datetime.datetime.now()
