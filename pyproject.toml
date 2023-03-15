@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aiosoma"
-version = "1.1.4"
+version = "1.1.5"
 description = "Asyncio SOMA Connect"
 authors = ["Avi Miller <me@dje.li>"]
 license = "MIT"
