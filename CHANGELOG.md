@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.1.7 (2023-09-02)
+
+### Fix
+
+* **deps:** Update dependency pre-commit to v3.4.0 ([`16aad58`](https://github.com/Djelibeybi/aiosoma/commit/16aad58de273b5c00234a369a5c9d06c16151a93))
+
 ## v1.1.6 (2023-03-27)
 ### Fix
 * **deps:** Update dependency rich to v13.3.3 ([`1702f2e`](https://github.com/Djelibeybi/aiosoma/commit/1702f2e56685cf978555d61fc009b296f714a228))
