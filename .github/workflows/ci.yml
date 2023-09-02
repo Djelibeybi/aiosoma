@@ -75,7 +75,9 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    environment: release
+    concurrency: release
+    permissions:
+      id-token: write
     if: github.ref == 'refs/heads/main'
     needs:
       - test
@@ -86,16 +88,22 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.GH_PAT }}
 
-      # Run semantic release:
-      # - Update CHANGELOG.md
-      # - Update version in code
-      # - Create git tag
-      # - Create GitHub release
-      # - Publish to PyPI
+      # This action uses Python Semantic Release v8
       - name: Python Semantic Release
-        uses: relekang/python-semantic-release@v7.34.6
+        id: release
+        uses: python-semantic-release/python-semantic-release@v8.0.8
         with:
-          github_token: ${{ secrets.GH_PAT }}
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # NOTE: DO NOT wrap the conditional in ${{ }} as it will always evaluate to true.
+        # See https://github.com/actions/runner/issues/1173
+        if: steps.release.outputs.released == 'true'
+
+      - name: Publish package distributions to GitHub Releases
+        uses: python-semantic-release/upload-to-gh-release@main
+        if: steps.release.outputs.released == 'true'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
