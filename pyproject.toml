@@ -67,7 +67,7 @@ homeassistant = "^2023.0.0"
 branch = "main"
 version_toml = ["pyproject.toml:tool.poetry.version"]
 version_variables = ["src/aiosoma/__init__.py:__version__"]
-build_command = "pip install poetry && poetry build"
+build_command = " /home/runner/.local/bin/poetry build"
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault --cov=aiosoma --cov-report=term-missing:skip-covered --ignore src/aiosoma/__cli__.py"
