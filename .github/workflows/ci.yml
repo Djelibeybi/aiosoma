@@ -78,6 +78,7 @@ jobs:
     concurrency: release
     permissions:
       id-token: write
+      contents: write
     if: github.ref == 'refs/heads/main'
     needs:
       - test
@@ -89,11 +90,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v4
+      - name: Install Python
+        uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
-      - uses: snok/install-poetry@v1.3.4
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.3.4
 
       # This action uses Python Semantic Release v8
       - name: Python Semantic Release
