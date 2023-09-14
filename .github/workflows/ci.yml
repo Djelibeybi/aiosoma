@@ -62,7 +62,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "${{ matrix.python-version }}"
       - uses: snok/install-poetry@v1.3.4
       - name: Install Dependencies
         run: poetry install --with=test --without=dev --without=hass
@@ -88,6 +88,12 @@ jobs:
       - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4
         with:
           fetch-depth: 0
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - uses: snok/install-poetry@v1.3.4
 
       # This action uses Python Semantic Release v8
       - name: Python Semantic Release
