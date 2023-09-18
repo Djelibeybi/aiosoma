@@ -2,6 +2,25 @@
 
 
 
+## v1.1.9 (2023-09-18)
+
+### Chore
+
+* chore(ci): fix codecov-action version
+
+Signed-off-by: Avi Miller &lt;me@dje.li&gt; ([`7fa7d50`](https://github.com/Djelibeybi/aiosoma/commit/7fa7d50f739cabe75a0fac0c150cf2533b151003))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.11.0 ([`374b1c9`](https://github.com/Djelibeybi/aiosoma/commit/374b1c9f4b079ccff8fddc504fe607575405d3ac))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.9.0 ([`f711d16`](https://github.com/Djelibeybi/aiosoma/commit/f711d16ddd5aa1e204328feedbec5f586343742e))
+
+* chore(deps): update codecov/codecov-action action to v4 ([`126135a`](https://github.com/Djelibeybi/aiosoma/commit/126135ad62554186c4fd1dccfc8be94a0cac82fc))
+
+### Fix
+
+* fix(deps): update dependency rich to v13.5.3 ([`9def8a2`](https://github.com/Djelibeybi/aiosoma/commit/9def8a2d90d16c50e20aa493fde5bf0dc5d7b92d))
+
+
 ## v1.1.8 (2023-09-14)
 
 ### Chore
