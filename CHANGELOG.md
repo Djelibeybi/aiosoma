@@ -2,6 +2,31 @@
 
 
 
+## v1.1.10 (2023-09-30)
+
+### Chore
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.10.0 ([`a372c9d`](https://github.com/Djelibeybi/aiosoma/commit/a372c9d92db35be95cae58f53fa6727ea0041e06))
+
+* chore(deps): update dependency homeassistant to v2023.9.3 ([`60658e1`](https://github.com/Djelibeybi/aiosoma/commit/60658e150811b69b7dc72a692a1e87faa1b6c994))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.13.0 ([`5caadfc`](https://github.com/Djelibeybi/aiosoma/commit/5caadfc051724866bcd0261a36ee00c22a773a5a))
+
+* chore(deps): update actions/checkout digest to 8ade135 ([`e1406a9`](https://github.com/Djelibeybi/aiosoma/commit/e1406a935792d389fd3fa5899cf97e60f887dbd8))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.9.1 ([`778c3ef`](https://github.com/Djelibeybi/aiosoma/commit/778c3ef9c58a2f4393d6e110bb5abd00a20d92ce))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.12.0 ([`7cf67dd`](https://github.com/Djelibeybi/aiosoma/commit/7cf67dd92ee5bc1704938d33f6e296881ca886f0))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.11.2 ([`e98b967`](https://github.com/Djelibeybi/aiosoma/commit/e98b9674547bde28e67d687af6a2ec13b82038f1))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.11.1 ([`0d424a0`](https://github.com/Djelibeybi/aiosoma/commit/0d424a048e5377e1a1ed742bb04b23ceb00459c9))
+
+### Fix
+
+* fix(deps): update dependency rich to v13.6.0 ([`0b870f6`](https://github.com/Djelibeybi/aiosoma/commit/0b870f653d873f9ebedaa240c00841718cb65e5a))
+
+
 ## v1.1.9 (2023-09-18)
 
 ### Chore
