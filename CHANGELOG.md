@@ -2,6 +2,48 @@
 
 
 
+## v1.1.11 (2023-10-13)
+
+### Chore
+
+* chore(deps): update dependency homeassistant to v2023.10.3 ([`adc8ac6`](https://github.com/Djelibeybi/aiosoma/commit/adc8ac6dc7241ce7e1e8ac6d4ff8c4b23742d37f))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.6.0 ([`6439979`](https://github.com/Djelibeybi/aiosoma/commit/6439979afa2b44b3245ca2b8d593df7497411ba7))
+
+* chore(deps): update pre-commit hook pre-commit/pre-commit-hooks to v4.5.0 ([`a699be1`](https://github.com/Djelibeybi/aiosoma/commit/a699be14e7acee96ee8cf79f1a4cfa8016914835))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.15.0 ([`9216f39`](https://github.com/Djelibeybi/aiosoma/commit/9216f39c5d472f61aee3995d294705051d253ce0))
+
+* chore(deps): update dependency homeassistant to v2023.10.1 ([`561854f`](https://github.com/Djelibeybi/aiosoma/commit/561854fd092b104a402300bef59ea7f606bfd581))
+
+* chore(deps): update dependency homeassistant to v2023.10.0 ([`5d8a306`](https://github.com/Djelibeybi/aiosoma/commit/5d8a3068a42e93faa8e1b32b9f38730c966216eb))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.14.0 ([`218fff3`](https://github.com/Djelibeybi/aiosoma/commit/218fff32f085c7ab0ffeaa38191e34b50d0f5ee4))
+
+* chore(deps): update pre-commit hook codespell-project/codespell to v2.2.6 ([`7f1b572`](https://github.com/Djelibeybi/aiosoma/commit/7f1b572f8f439cc306b358fb42902097f6ccbd25))
+
+* chore(deps): update dependency codespell to v2.2.6 ([`31433cc`](https://github.com/Djelibeybi/aiosoma/commit/31433ccc363ef1e910e55fc8e4f96e8e614842ee))
+
+* chore(deps-dev): bump urllib3 from 2.0.4 to 2.0.6
+
+Bumps [urllib3](https://github.com/urllib3/urllib3) from 2.0.4 to 2.0.6.
+- [Release notes](https://github.com/urllib3/urllib3/releases)
+- [Changelog](https://github.com/urllib3/urllib3/blob/main/CHANGES.rst)
+- [Commits](https://github.com/urllib3/urllib3/compare/2.0.4...2.0.6)
+
+---
+updated-dependencies:
+- dependency-name: urllib3
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`e68a458`](https://github.com/Djelibeybi/aiosoma/commit/e68a4588b79df0de8ca6f85e940803ac1ed348fc))
+
+### Fix
+
+* fix(deps): update dependency pre-commit to v3.5.0 ([`c846c1e`](https://github.com/Djelibeybi/aiosoma/commit/c846c1ea03d472aaacfe9a4d587bd0131c24a6d9))
+
+
 ## v1.1.10 (2023-09-30)
 
 ### Chore
