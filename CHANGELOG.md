@@ -2,6 +2,36 @@
 
 
 
+## v1.1.12 (2023-10-18)
+
+### Chore
+
+* chore(deps-dev): bump urllib3 from 2.0.6 to 2.0.7
+
+Bumps [urllib3](https://github.com/urllib3/urllib3) from 2.0.6 to 2.0.7.
+- [Release notes](https://github.com/urllib3/urllib3/releases)
+- [Changelog](https://github.com/urllib3/urllib3/blob/main/CHANGES.rst)
+- [Commits](https://github.com/urllib3/urllib3/compare/2.0.6...2.0.7)
+
+---
+updated-dependencies:
+- dependency-name: urllib3
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`c495e89`](https://github.com/Djelibeybi/aiosoma/commit/c495e8980db007666fab8b0129070b9ca20f1457))
+
+* chore(deps): update pre-commit hook psf/black to v23.10.0 ([`6793bc9`](https://github.com/Djelibeybi/aiosoma/commit/6793bc9248fd9da8f5bef2162aaeb528fab82a16))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.11.0 ([`147cb92`](https://github.com/Djelibeybi/aiosoma/commit/147cb92cc1a9b1f59ace4b74b7d4d6ce74c6d116))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.10.1 ([`21d26e8`](https://github.com/Djelibeybi/aiosoma/commit/21d26e84a8bd881b467911709aa015e4f8f13779))
+
+### Fix
+
+* fix(deps): update dependency black to v23.10.0 ([`a081865`](https://github.com/Djelibeybi/aiosoma/commit/a0818653165bf7501f3a75ebe2e04dfad2382e59))
+
+
 ## v1.1.11 (2023-10-13)
 
 ### Chore
