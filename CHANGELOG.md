@@ -2,6 +2,17 @@
 
 
 
+## v1.1.13 (2023-10-18)
+
+### Chore
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.12.0 ([`872af88`](https://github.com/Djelibeybi/aiosoma/commit/872af887da60eb1f2674eb40a0712de208995d00))
+
+### Fix
+
+* fix(deps): update dependency aiohttp to v3.8.6 ([`d38cd78`](https://github.com/Djelibeybi/aiosoma/commit/d38cd780d6118ca4e6b8d647e7d3da0b65b53883))
+
+
 ## v1.1.12 (2023-10-18)
 
 ### Chore
