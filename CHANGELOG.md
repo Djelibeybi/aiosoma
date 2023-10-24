@@ -2,6 +2,19 @@
 
 
 
+## v1.1.14 (2023-10-24)
+
+### Chore
+
+* chore(deps): update actions/checkout digest to b4ffde6 ([`651d4ca`](https://github.com/Djelibeybi/aiosoma/commit/651d4ca0328433311dd51256c8a9923999b98217))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.6.1 ([`b67de95`](https://github.com/Djelibeybi/aiosoma/commit/b67de953e7697e9279864c2235cfac010661fea4))
+
+### Fix
+
+* fix(deps): update dependency black to v23.10.1 ([`2174de3`](https://github.com/Djelibeybi/aiosoma/commit/2174de399bb5423a25a4455bcda133a4701129ef))
+
+
 ## v1.1.13 (2023-10-18)
 
 ### Chore
