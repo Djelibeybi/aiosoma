@@ -2,6 +2,41 @@
 
 
 
+## v1.1.15 (2023-11-08)
+
+### Chore
+
+* chore(deps): update pre-commit hook psf/black to v23.11.0 ([`44bd7c2`](https://github.com/Djelibeybi/aiosoma/commit/44bd7c2cdd1e91ff2b7f6d3092205dddb9938fdc))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.7.0 ([`c0eef53`](https://github.com/Djelibeybi/aiosoma/commit/c0eef53e9c8363adfd9e515bbf927a30249f0add))
+
+* chore(deps-dev): bump pip from 23.2.1 to 23.3
+
+Bumps [pip](https://github.com/pypa/pip) from 23.2.1 to 23.3.
+- [Changelog](https://github.com/pypa/pip/blob/main/NEWS.rst)
+- [Commits](https://github.com/pypa/pip/compare/23.2.1...23.3)
+
+---
+updated-dependencies:
+- dependency-name: pip
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`6966437`](https://github.com/Djelibeybi/aiosoma/commit/696643775ad61709104580772d32cb51af672f46))
+
+* chore(deps): update wagoid/commitlint-github-action action to v5.4.4 ([`abaa465`](https://github.com/Djelibeybi/aiosoma/commit/abaa465208937990c82f76179c3b4f2538432c6f))
+
+* chore(deps): update dependency pytest-asyncio to ^0.22.0 ([`0004306`](https://github.com/Djelibeybi/aiosoma/commit/000430690fe04e9a5a145875ae109b006ec231e0))
+
+* chore(deps): update dependency pytest to v7.4.3 ([`86a837c`](https://github.com/Djelibeybi/aiosoma/commit/86a837cf86813261545b493416f5c650c85ddbd3))
+
+* chore(deps): update pre-commit hook psf/black to v23.10.1 ([`91c0789`](https://github.com/Djelibeybi/aiosoma/commit/91c0789a2cc35d1499eaaec828f6efeb17542379))
+
+### Fix
+
+* fix(deps): update dependency black to v23.11.0 ([`5107cf2`](https://github.com/Djelibeybi/aiosoma/commit/5107cf2ecf64930c2270e370dbdbaeade5bfbf14))
+
+
 ## v1.1.14 (2023-10-24)
 
 ### Chore
