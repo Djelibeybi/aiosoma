@@ -2,6 +2,21 @@
 
 
 
+## v1.1.16 (2023-11-15)
+
+### Chore
+
+* chore(deps): update dependency aioresponses to v0.7.5 ([`63a6583`](https://github.com/Djelibeybi/aiosoma/commit/63a658365cafa4dca2cf439f13c15f43d6310928))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-prettier to v3.1.0 ([`5ad76fc`](https://github.com/Djelibeybi/aiosoma/commit/5ad76fcfbab1645f7551ad83fa2580a1e692c0d0))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.7.0 ([`b24eb7e`](https://github.com/Djelibeybi/aiosoma/commit/b24eb7e52c4027734ee5ec12eb4d3e2b80f6794b))
+
+### Fix
+
+* fix(deps): update dependency rich to v13.7.0 ([`e231237`](https://github.com/Djelibeybi/aiosoma/commit/e23123790e40494006c52df9548f5d4d8a1891c9))
+
+
 ## v1.1.15 (2023-11-08)
 
 ### Chore
