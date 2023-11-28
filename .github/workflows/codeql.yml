@@ -30,7 +30,7 @@ jobs:
       - uses: snok/install-poetry@v1.3.4
 
       - name: Install Dependencies
-        run: poetry install --with=test --without=dev --without=hass
+        run: poetry install --with=test --without=dev
         shell: bash
 
       # Initializes the CodeQL tools for scanning.
