@@ -2,6 +2,47 @@
 
 
 
+## v1.1.17 (2023-12-10)
+
+### Chore
+
+* chore(deps): update pre-commit hook pycqa/isort to v5.13.0 ([`92b5439`](https://github.com/Djelibeybi/aiosoma/commit/92b5439d027206a62d6ec867afe4ddbdd62a5eb3))
+
+* chore(deps): update dependency isort to v5.13.0 ([`fe2d4c2`](https://github.com/Djelibeybi/aiosoma/commit/fe2d4c29d51c28de9ebfc65eb61d4a1eb076d2ab))
+
+* chore(deps): update pre-commit hook pycqa/bandit to v1.7.6 ([`6159bde`](https://github.com/Djelibeybi/aiosoma/commit/6159bde8ba9ae3e869506968bd85cea2925ce158))
+
+* chore(deps): update actions/setup-python action to v5 ([`cd97ba0`](https://github.com/Djelibeybi/aiosoma/commit/cd97ba08fc904611f3a6f5ecb6261398b7512e8a))
+
+* chore(deps): update dependency freezegun to v1.3.1 ([`7f2fdf6`](https://github.com/Djelibeybi/aiosoma/commit/7f2fdf6d93359f04c91883667eb8f73f8b70c533))
+
+* chore(deps): update dependency pytest-asyncio to v0.23.2 ([`df19dc7`](https://github.com/Djelibeybi/aiosoma/commit/df19dc7719980b6dd6d3e12194fb61ca4c8e0abb))
+
+* chore(deps): update dependency freezegun to v1.3.0 ([`b850abb`](https://github.com/Djelibeybi/aiosoma/commit/b850abbc48c94035c0b7892df0dc955a8960e3a1))
+
+* chore(deps): update dependency pytest-asyncio to v0.23.1 ([`00aaf96`](https://github.com/Djelibeybi/aiosoma/commit/00aaf9678845d2feb2b19dfbf000fd1b194b3048))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.13.0 ([`10b01f7`](https://github.com/Djelibeybi/aiosoma/commit/10b01f7480ba1522c6537c551aa021b80b919ccb))
+
+* chore(deps): update dependency pytest-asyncio to ^0.23.0 ([`7343e7d`](https://github.com/Djelibeybi/aiosoma/commit/7343e7d546b7527f6c4e952d567bcdb3fcf0e1a6))
+
+* chore(deps): update dependency sphinx-rtd-theme to v2 ([`9ed2660`](https://github.com/Djelibeybi/aiosoma/commit/9ed26609624b8666821cea21f0b90b5335fa28f3))
+
+* chore(deps): update dependencies
+
+Signed-off-by: Avi Miller &lt;me@dje.li&gt; ([`9fd3cb2`](https://github.com/Djelibeybi/aiosoma/commit/9fd3cb294ebe385c9f8e1a94d3209fc1c885f0c9))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.7.1 ([`48e8a64`](https://github.com/Djelibeybi/aiosoma/commit/48e8a64996951dbac1742812b2144a0e930ff52d))
+
+* chore(deps): update dependency aioresponses to v0.7.6 ([`619343a`](https://github.com/Djelibeybi/aiosoma/commit/619343ad65c0f76d287f0a2c5e5e850668f3991e))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.7.1 ([`3b72611`](https://github.com/Djelibeybi/aiosoma/commit/3b72611785302af2aa8d2b15da99ef79ef2fc0a5))
+
+### Fix
+
+* fix(deps): update dependency pre-commit to v3.6.0 ([`6a741e2`](https://github.com/Djelibeybi/aiosoma/commit/6a741e2865a5d40e5cf30d835d5d97ce49728140))
+
+
 ## v1.1.16 (2023-11-15)
 
 ### Chore
