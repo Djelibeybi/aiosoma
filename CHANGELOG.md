@@ -2,6 +2,21 @@
 
 
 
+## v1.1.18 (2023-12-12)
+
+### Chore
+
+* chore(deps): update pre-commit hook psf/black to v23.12.0 ([`f93fe54`](https://github.com/Djelibeybi/aiosoma/commit/f93fe544af79d6e552f198be3c757d6a7448dc96))
+
+* chore(deps): update pre-commit hook pycqa/isort to v5.13.1 ([`8107ba5`](https://github.com/Djelibeybi/aiosoma/commit/8107ba5882c17e41a61130a2faf89daecbb439ed))
+
+* chore(deps): update dependency isort to v5.13.1 ([`6f39ba3`](https://github.com/Djelibeybi/aiosoma/commit/6f39ba3b2684a7a22921c8a3ad03cbf52dbbb45f))
+
+### Fix
+
+* fix(deps): update dependency black to v23.12.0 ([`f93c892`](https://github.com/Djelibeybi/aiosoma/commit/f93c89275d4cdefd3a8c1824957f2c0e8ccebd3e))
+
+
 ## v1.1.17 (2023-12-10)
 
 ### Chore
