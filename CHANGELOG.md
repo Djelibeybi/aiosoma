@@ -2,6 +2,27 @@
 
 
 
+## v1.1.19 (2023-12-23)
+
+### Chore
+
+* chore(deps): update pre-commit hook psf/black to v23.12.1 ([`7c7e783`](https://github.com/Djelibeybi/aiosoma/commit/7c7e783a6e7902af715224a3bc60eff587cc0b5b))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.8.0 ([`1a80f20`](https://github.com/Djelibeybi/aiosoma/commit/1a80f20fc669ab01e14a4d7b07c8565b170dd2b6))
+
+* chore(deps): update dependency freezegun to v1.4.0 ([`8f3c0f6`](https://github.com/Djelibeybi/aiosoma/commit/8f3c0f62b4ccae1b2dad0de7a83a216376b21021))
+
+* chore(deps): update github/codeql-action action to v3 ([`b238274`](https://github.com/Djelibeybi/aiosoma/commit/b238274991bf741f38dfd344b4fddd494d7d418d))
+
+* chore(deps): update pre-commit hook pycqa/isort to v5.13.2 ([`7b063d5`](https://github.com/Djelibeybi/aiosoma/commit/7b063d50fbde022dfab1387ade15a4adee7d4ecb))
+
+* chore(deps): update dependency isort to v5.13.2 ([`4beb5e9`](https://github.com/Djelibeybi/aiosoma/commit/4beb5e901ae30bcf3dbaa8acaf416025470e6846))
+
+### Fix
+
+* fix(deps): update dependency black to v23.12.1 ([`bcc46e0`](https://github.com/Djelibeybi/aiosoma/commit/bcc46e062e413a5b187362d49f158c3e64de130e))
+
+
 ## v1.1.18 (2023-12-12)
 
 ### Chore
