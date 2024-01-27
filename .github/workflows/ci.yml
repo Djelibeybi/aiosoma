@@ -75,7 +75,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
     needs:
       - test
-      - lint
       - commitlint
 
     steps:
