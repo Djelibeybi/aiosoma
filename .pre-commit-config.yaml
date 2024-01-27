@@ -9,7 +9,6 @@ ci:
   autofix_prs: true
   autoupdate_schedule: weekly
 
-
 repos:
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v3.13.0
