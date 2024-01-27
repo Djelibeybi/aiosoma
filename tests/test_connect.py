@@ -1,4 +1,5 @@
 """Tests for aiosoma.Connect class."""
+
 import random
 import re
 

@@ -1,4 +1,5 @@
 """Tests for aiosoma.Shade class."""
+
 import datetime
 import random
 
