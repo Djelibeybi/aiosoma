@@ -2,6 +2,74 @@
 
 
 
+## v1.1.20 (2024-01-28)
+
+### Chore
+
+* chore(deps): update pre-commit hook psf/black to v24.1.1 ([`7731ac7`](https://github.com/Djelibeybi/aiosoma/commit/7731ac79dee5ad83067bd8804337ed1a24ac0965))
+
+* chore(ci): fix CI workflow
+
+Signed-off-by: Avi Miller &lt;me@dje.li&gt; ([`a04045f`](https://github.com/Djelibeybi/aiosoma/commit/a04045f1f79cb74e46042e44d44b1f705eb0f628))
+
+* chore(ci): add pre-commit config to CI trigger list
+
+Signed-off-by: Avi Miller &lt;me@dje.li&gt; ([`0874066`](https://github.com/Djelibeybi/aiosoma/commit/08740668a99dd0209969e4e0c04db16003c4763f))
+
+* chore(pre-commit.ci): auto fixes ([`226f332`](https://github.com/Djelibeybi/aiosoma/commit/226f3325882eab32ea507902f05ed7be50f72e4c))
+
+* chore(ci): update pre-commit CI configuration
+
+Signed-off-by: Avi Miller &lt;me@dje.li&gt; ([`77f137a`](https://github.com/Djelibeybi/aiosoma/commit/77f137a9702b2c9c67fc476660ce93d39c26dfaa))
+
+* chore(pre-commit.ci): auto fixes ([`4fdec5e`](https://github.com/Djelibeybi/aiosoma/commit/4fdec5ef120c85e97212d2b043d1ce1a7f33b4e0))
+
+* chore: fix formatting
+
+Signed-off-by: Avi Miller &lt;me@dje.li&gt; ([`4471e22`](https://github.com/Djelibeybi/aiosoma/commit/4471e22fab22d0fbe4680a76734e2ea0b5707a36))
+
+* chore(deps): update dependency black to v24 ([`7a858ef`](https://github.com/Djelibeybi/aiosoma/commit/7a858ef6b39a2ccfa0ee464bd928f2292c86d5fa))
+
+* chore(deps): update pre-commit hook psf/black to v24 ([`1429b43`](https://github.com/Djelibeybi/aiosoma/commit/1429b435583b84ef6d12a6b3d43a35efb3e38cd7))
+
+* chore(deps): update pre-commit hook pycqa/bandit to v1.7.7 ([`2683ed2`](https://github.com/Djelibeybi/aiosoma/commit/2683ed2bbf996aa354f802a220801699006b6582))
+
+* chore(deps-dev): bump jinja2 from 3.1.2 to 3.1.3
+
+Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.2 to 3.1.3.
+- [Release notes](https://github.com/pallets/jinja/releases)
+- [Changelog](https://github.com/pallets/jinja/blob/main/CHANGES.rst)
+- [Commits](https://github.com/pallets/jinja/compare/3.1.2...3.1.3)
+
+---
+updated-dependencies:
+- dependency-name: jinja2
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`a0cf90a`](https://github.com/Djelibeybi/aiosoma/commit/a0cf90a1f434b6e9beb0c79379cf7c3c792f3fc2))
+
+* chore(deps): update tiangolo/issue-manager action to v0.4.1 ([`30a7e1e`](https://github.com/Djelibeybi/aiosoma/commit/30a7e1ef77506ae8f3842b2cc1527e7969319d52))
+
+* chore(deps): update wagoid/commitlint-github-action action to v5.4.5 ([`fe369f1`](https://github.com/Djelibeybi/aiosoma/commit/fe369f1441837ab9f683a04c4d822dba73311960))
+
+* chore(deps): update pre-commit hook pycqa/flake8 to v7 ([`c9af876`](https://github.com/Djelibeybi/aiosoma/commit/c9af8761bffc3c166ff7f23b7d8383c9fd25c533))
+
+* chore(deps): update dependency pytest-asyncio to v0.23.3 ([`408da7f`](https://github.com/Djelibeybi/aiosoma/commit/408da7f0bc731dc63844f99fa6fb6397faacdc38))
+
+* chore(deps): update dependency pytest to v7.4.4 ([`a75edd8`](https://github.com/Djelibeybi/aiosoma/commit/a75edd812598648fede418504e5e9a943ea3fd03))
+
+### Ci
+
+* ci: test with Python 3.12 and remove pre-commit action
+
+Signed-off-by: Avi Miller &lt;me@dje.li&gt; ([`ce40c4f`](https://github.com/Djelibeybi/aiosoma/commit/ce40c4f60a4a1988e829b354dd735feb979f914b))
+
+### Fix
+
+* fix(deps): update dependency black to v24.1.1 ([`352db21`](https://github.com/Djelibeybi/aiosoma/commit/352db21c149936fbee19f4d7b9d9dd1c9c99abf9))
+
+
 ## v1.1.19 (2023-12-23)
 
 ### Chore
