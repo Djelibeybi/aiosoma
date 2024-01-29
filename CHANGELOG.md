@@ -2,6 +2,17 @@
 
 
 
+## v1.1.21 (2024-01-29)
+
+### Chore
+
+* chore(deps): update dependency pytest-asyncio to v0.23.4 ([`adf3687`](https://github.com/Djelibeybi/aiosoma/commit/adf36873ff163d19b3c8a6c8eec85b7410fa9e2b))
+
+### Fix
+
+* fix(deps): update dependency aiohttp to v3.9.2 ([`9e5dd1b`](https://github.com/Djelibeybi/aiosoma/commit/9e5dd1b592cdbf1ee99894dc831b601bc831849b))
+
+
 ## v1.1.20 (2024-01-28)
 
 ### Chore
