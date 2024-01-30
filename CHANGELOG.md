@@ -2,6 +2,13 @@
 
 
 
+## v1.1.22 (2024-01-30)
+
+### Fix
+
+* fix(deps): update dependency aiohttp to v3.9.3 ([`74e951b`](https://github.com/Djelibeybi/aiosoma/commit/74e951b1ca99a0a36dff55d6adc52b8b56868875))
+
+
 ## v1.1.21 (2024-01-29)
 
 ### Chore
