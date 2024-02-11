@@ -2,6 +2,40 @@
 
 
 
+## v1.1.23 (2024-02-11)
+
+### Chore
+
+* chore(deps): update dependency pytest-asyncio to v0.23.5 ([`d22d9ca`](https://github.com/Djelibeybi/aiosoma/commit/d22d9cacfb110e3c9e3574db1c97f9e438ab1286))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.7.1 ([`77b4a8a`](https://github.com/Djelibeybi/aiosoma/commit/77b4a8a6d23697bcd44ee10b5b8102ae43ca8604))
+
+* chore(pre-commit.ci): pre-commit autoupdate
+
+updates:
+- [github.com/python-poetry/poetry: 1.7.1 → 1.7.0](https://github.com/python-poetry/poetry/compare/1.7.1...1.7.0) ([`e86fd84`](https://github.com/Djelibeybi/aiosoma/commit/e86fd8423c3f23e58430733e15ff857a452415fc))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.14.1 ([`eb316ae`](https://github.com/Djelibeybi/aiosoma/commit/eb316ae0c3bedac61cc2c04ad31ec05d211f2e34))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.14.0 ([`cbad5c4`](https://github.com/Djelibeybi/aiosoma/commit/cbad5c44cdbceb966a9a5e3bdb5a21abcb74579e))
+
+* chore(deps): update codecov/codecov-action action to v4 ([`0a310f1`](https://github.com/Djelibeybi/aiosoma/commit/0a310f1c0ea23ec694a33a0959eb9c32cc91de72))
+
+* chore(deps): update tiangolo/issue-manager action to v0.5.0 ([`12a1b8e`](https://github.com/Djelibeybi/aiosoma/commit/12a1b8e3a8a3b48daf1b65a33234f171da157806))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.7.1 ([`cbd93e8`](https://github.com/Djelibeybi/aiosoma/commit/cbd93e8f350f40c9bb799941a18d2ab131a5d9d4))
+
+* chore(pre-commit.ci): pre-commit autoupdate
+
+updates:
+- [github.com/python-poetry/poetry: 1.7.1 → 1.7.0](https://github.com/python-poetry/poetry/compare/1.7.1...1.7.0)
+- [github.com/pre-commit/mirrors-prettier: v3.1.0 → v4.0.0-alpha.8](https://github.com/pre-commit/mirrors-prettier/compare/v3.1.0...v4.0.0-alpha.8) ([`6aabfe9`](https://github.com/Djelibeybi/aiosoma/commit/6aabfe9041343768fe4c4995b5e2a1577f4253c7))
+
+### Fix
+
+* fix(deps): update dependency pre-commit to v3.6.1 ([`6ee9800`](https://github.com/Djelibeybi/aiosoma/commit/6ee9800945c68997faab453f4ab9eda442afd465))
+
+
 ## v1.1.22 (2024-01-30)
 
 ### Fix
