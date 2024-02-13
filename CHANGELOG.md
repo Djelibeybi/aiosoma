@@ -2,6 +2,17 @@
 
 
 
+## v1.1.24 (2024-02-13)
+
+### Chore
+
+* chore(deps): update pre-commit hook psf/black to v24.2.0 ([`f370f97`](https://github.com/Djelibeybi/aiosoma/commit/f370f97a9a05568cd751b69e1f7cb36e81c67084))
+
+### Fix
+
+* fix(deps): update dependency black to v24.2.0 ([`068819d`](https://github.com/Djelibeybi/aiosoma/commit/068819ddf5d1aa531e36fe61a91506af795ec25f))
+
+
 ## v1.1.23 (2024-02-11)
 
 ### Chore
