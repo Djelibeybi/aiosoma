@@ -2,6 +2,25 @@
 
 
 
+## v1.1.25 (2024-02-18)
+
+### Chore
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.15.0 ([`9206671`](https://github.com/Djelibeybi/aiosoma/commit/9206671ab26d9af93d1d00ae2e44a0a5f5c08b96))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.7.1 ([`ba8fe7a`](https://github.com/Djelibeybi/aiosoma/commit/ba8fe7a6944b2dc7639f3ebee0084392ec1a8e2d))
+
+* chore(pre-commit.ci): pre-commit autoupdate
+
+updates:
+- [github.com/python-poetry/poetry: 1.7.1 → 1.7.0](https://github.com/python-poetry/poetry/compare/1.7.1...1.7.0)
+- [github.com/psf/black: 24.1.1 → 24.2.0](https://github.com/psf/black/compare/24.1.1...24.2.0) ([`0165b3f`](https://github.com/Djelibeybi/aiosoma/commit/0165b3fb352f5a006b8709d462401d32df5a213a))
+
+### Fix
+
+* fix(deps): update dependency pre-commit to v3.6.2 ([`f3e09cd`](https://github.com/Djelibeybi/aiosoma/commit/f3e09cd0b3bb2ff302984d489f71753ebf5d92f8))
+
+
 ## v1.1.24 (2024-02-13)
 
 ### Chore
